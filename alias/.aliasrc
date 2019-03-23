@@ -1,0 +1,108 @@
+# add source ~/.aliasrc to ~/.zshrc
+
+# Zsh
+alias zshrc="nvim ~/.zshrc"
+alias szsh="source ~/.zshrc"
+
+# Alias
+alias aliasrc="nvim ~/.aliasrc"
+
+# Vim
+alias virc="nvim ~/.config/nvim/init.vim"
+alias vimrc="nvim ~/.config/nvim/init.vim"
+alias nvimrc="nvim ~/.config/nvim/init.vim"
+alias vi="nvim"
+alias vim="nvim"
+
+# Tmux
+alias tmuxcf="nvim ~/.tmux.conf"
+
+# Brew
+alias brewu="brew update && brew upgrade && brew cleanup"
+
+# Apt
+alias aptu="sudo apt update && sudo apt upgrade -y"
+
+# Npm
+alias npmlg="npm list -g depth=0"
+
+# Find
+ff() {
+	find . -name "$1"
+}
+
+# Git
+alias gcl="git clean -df"
+alias gitcf="nvim ~/.gitconfig"
+
+groot() {
+	cd $(git rev-parse --show-toplevel)
+}
+
+push2prod() {
+	git checkout master
+	git pull
+	git checkout production
+	git pull
+	git merge master
+	git push
+	git checkout master
+}
+
+alias yolo="git commit -m '$(curl -s https://whatthecommit.com/index.txt)'"
+
+# Rsync
+rsignoreexisting () {
+	rsync -razv --ignore-existing "$1" "$2"
+}
+
+rsrpi() {
+	rsync --remove-source-files -avz -e ssh pi@rpi2.local:/home/pi/torrents/complete/ .
+}
+
+# Ag
+#agcust () {
+	#ag -G \\*."$1" "$2"
+#}
+
+# Ip
+alias getip="ifconfig | grep 'inet ' | grep -v '127.0.0.1'"
+
+# Python
+alias actenv="source venv/bin/activate"
+alias setupenv="virtualenv -p python3 venv"
+alias prun="pipenv run"
+
+# Oh-my-zsh plugins
+findalias () {
+	alias | grep "$1"
+}
+
+# Ssh
+removessh () {
+	ssh-keygen -R "$1"
+}
+
+alias rpi2="ssh pi@rpi2.local"
+
+# Mkdir
+alias mmkdir="mkdir -p"
+
+# Ls
+alias las="la -S"
+
+# Exa
+alias l="exa --long --header --group-directories-first --git -a"
+
+# Docker
+dockerrmi() {
+	docker rmi -f $(docker images -q)
+}
+
+dockerrm() {
+	docker rm -f $(docker ps -a -q)
+}
+
+dockerb() {
+	docker build . -t "$1"
+}
