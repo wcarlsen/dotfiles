@@ -26,8 +26,3 @@ source $ZSH/oh-my-zsh.sh
 source ~/.aliasrc
 
 export PIPENV_VENV_IN_PROJECT=1
-
-# Hub
-if (( ! ${fpath[(I)/usr/local/share/zsh/site-functions]} )); then
-	FPATH=/usr/local/share/zsh/site-functions:$FPATH
-fi
