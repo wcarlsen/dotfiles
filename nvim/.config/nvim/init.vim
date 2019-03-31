@@ -26,6 +26,7 @@ Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 Plug 'ambv/black', { 'for': 'python' }
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
 

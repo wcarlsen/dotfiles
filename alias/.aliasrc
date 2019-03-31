@@ -14,6 +14,9 @@ alias nvimrc="nvim ~/.config/nvim/init.vim"
 alias vi="nvim"
 alias vim="nvim"
 
+# Vscode
+alias vscode="code-insiders ."
+
 # Tmux
 alias tmuxcf="nvim ~/.tmux.conf"
 
