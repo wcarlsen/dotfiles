@@ -1,3 +1,5 @@
+set number
+set relativenumber
 set background=dark
 set ignorecase
 
@@ -12,11 +14,11 @@ set tabstop=4
 
 call plug#begin('~/.local/share/nvim/plugged')
 
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-sleuth'
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
-"Plug 'ludovicchabant/vim-gutentags'
 Plug 'kien/ctrlp.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -58,3 +60,6 @@ endif
 autocmd BufWritePre *.py execute ':Black'
 
 autocmd Filetype javascript setlocal sw=2 sts=2 expandtab
+
+" Ctrlp
+let g:ctrlp_show_hidden = 1
