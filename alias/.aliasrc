@@ -31,7 +31,7 @@ alias npmlg="npm list -g depth=0"
 
 # Find
 ff() {
-	find . -name "$1"
+	find . -name "*$1*"
 }
 
 # Git
@@ -53,6 +53,14 @@ push2prod() {
 }
 
 alias yolo="git commit -m '$(curl -s https://whatthecommit.com/index.txt)'"
+
+# Ctags
+tags() {
+	cwd=$(pwd)
+	groot
+	ctags -R *
+	cd "$cwd"
+}
 
 # Rsync
 rsignoreexisting () {
@@ -108,4 +116,11 @@ dockerrm() {
 
 dockerb() {
 	docker build . -t "$1"
+}
+
+# Mv
+moviemv() {
+	mv -v */*.mp4 ~/Movies/movies/ 2>/dev/null
+	mv -v */*.mkv ~/Movies/movies/ 2>/dev/null
+	mv -v */*.avi ~/Movies/movies/ 2>/dev/null
 }

@@ -3,7 +3,6 @@ set relativenumber
 set background=dark
 set ignorecase
 
-" Leader
 let mapleader = ","
 let maplocalleader = ","
 
@@ -28,7 +27,9 @@ Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 Plug 'ambv/black', { 'for': 'python' }
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
@@ -42,6 +43,11 @@ set updatetime=100
 " Deoplete
 let g:deoplete#enable_at_startup = 1
 set completeopt-=preview
+
+" Ariline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#ale#enabled = 1
 
 " Ale
 let g:ale_list_window_size = 5
@@ -59,7 +65,15 @@ endif
 " Black
 autocmd BufWritePre *.py execute ':Black'
 
+" Filetype
 autocmd Filetype javascript setlocal sw=2 sts=2 expandtab
+autocmd Filetype html setlocal sw=2 sts=2 expandtab
+autocmd Filetype python setlocal sw=4 sts=4 expandtab
 
 " Ctrlp
 let g:ctrlp_show_hidden = 1
+
+" Supertab
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
+noremap <leader>t <c-]>
