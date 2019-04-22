@@ -2,6 +2,7 @@ set number
 set relativenumber
 set background=dark
 set ignorecase
+set nohlsearch
 
 let mapleader = ","
 let maplocalleader = ","
@@ -27,9 +28,10 @@ Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 Plug 'ambv/black', { 'for': 'python' }
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'mileszs/ack.vim'
 
 call plug#end()
 
@@ -75,5 +77,10 @@ let g:ctrlp_show_hidden = 1
 
 " Supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" Ack
+if executable('ag')
+	let g:ackprg = 'ag --vimgrep'
+endif
 
 noremap <leader>t <c-]>
