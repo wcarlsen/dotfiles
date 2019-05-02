@@ -25,7 +25,7 @@ alias brewu="brew update && brew upgrade && brew cleanup"
 alias aptu="sudo apt update && sudo apt upgrade -y"
 
 # Npm
-alias npmlg="npm list -g depth=0"
+alias npmlg="npm list -g --depth=0"
 
 # Find
 ff() {
@@ -132,3 +132,6 @@ moviemv() {
 	mvmedia mkv $dest
 	mvmedia avi $dest
 }
+
+# Misc
+alias clc="clear"
