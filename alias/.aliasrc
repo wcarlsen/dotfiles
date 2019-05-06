@@ -13,7 +13,10 @@ alias nvimrc="nvim ~/.config/nvim/init.vim" alias vi="nvim"
 alias vim="nvim"
 
 # Vscode
-alias vscode="code-insiders ."
+alias code="code-insiders ."
+
+# Hyper
+alias hyperc="nvim ~/.hyper.js"
 
 # Tmux
 alias tmuxcf="nvim ~/.tmux.conf"
@@ -23,6 +26,9 @@ alias brewu="brew update && brew upgrade && brew cleanup"
 
 # Apt
 alias aptu="sudo apt update && sudo apt upgrade -y"
+
+# Pacman
+alias pacu="sudo pacman -Syu"
 
 # Npm
 alias npmlg="npm list -g depth=0"
@@ -105,6 +111,8 @@ alias las="la -S"
 alias l="exa --long --header --group-directories-first --git -a"
 
 # Docker
+alias dockerstart="sudo systemctl start docker.service"
+
 dockerrmi() {
 	docker rmi -f $(docker images -q)
 }

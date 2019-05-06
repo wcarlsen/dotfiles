@@ -10,7 +10,7 @@ plugins=(
 	kubectl
 	osx
 	thefuck
-	vi-mode
+	#vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
