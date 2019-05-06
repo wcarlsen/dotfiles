@@ -29,8 +29,8 @@ Plug 'ambv/black', { 'for': 'python' }
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 "Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 Plug 'mileszs/ack.vim'
 
 call plug#end()
@@ -47,9 +47,9 @@ let g:deoplete#enable_at_startup = 1
 set completeopt-=preview
 
 " Ariline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#ale#enabled = 1
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline_powerline_fonts = 1
+"let g:airline#extensions#ale#enabled = 1
 
 " Ale
 let g:ale_list_window_size = 5

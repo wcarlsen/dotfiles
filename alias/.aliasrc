@@ -31,7 +31,7 @@ alias aptu="sudo apt update && sudo apt upgrade -y"
 alias pacu="sudo pacman -Syu"
 
 # Npm
-alias npmlg="npm list -g depth=0"
+alias npmlg="npm list -g --depth=0"
 
 # Find
 ff() {
@@ -140,3 +140,6 @@ moviemv() {
 	mvmedia mkv $dest
 	mvmedia avi $dest
 }
+
+# Misc
+alias clc="clear"
