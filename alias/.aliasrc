@@ -57,6 +57,7 @@ push2prod() {
 	git checkout master
 }
 
+alias excuse="curl -s https://whatthecommit.com/index.txt"
 alias yolo="git commit -m '$(curl -s https://whatthecommit.com/index.txt)'"
 
 # Ctags
@@ -142,6 +143,9 @@ moviemv() {
 	mvmedia mkv $dest
 	mvmedia avi $dest
 }
+
+# Aws
+alias setawsacc="export AWS_DEFAULT_PROFILE=$1"
 
 # Misc
 alias clc="clear"
