@@ -13,7 +13,10 @@ alias nvimrc="nvim ~/.config/nvim/init.vim" alias vi="nvim"
 alias vim="nvim"
 
 # Vscode
-alias vscode="code-insiders ."
+alias code="code-insiders ."
+
+# Hyper
+alias hyperc="nvim ~/.hyper.js"
 
 # Tmux
 alias tmuxcf="nvim ~/.tmux.conf"
@@ -23,6 +26,9 @@ alias brewu="brew update && brew upgrade && brew cleanup"
 
 # Apt
 alias aptu="sudo apt update && sudo apt upgrade -y"
+
+# Pacman
+alias pacu="sudo pacman -Syu"
 
 # Npm
 alias npmlg="npm list -g --depth=0"
@@ -51,6 +57,7 @@ push2prod() {
 	git checkout master
 }
 
+alias excuse="curl -s https://whatthecommit.com/index.txt"
 alias yolo="git commit -m '$(curl -s https://whatthecommit.com/index.txt)'"
 
 # Ctags
@@ -105,6 +112,10 @@ alias las="la -S"
 alias l="exa --long --header --group-directories-first --git -a"
 
 # Docker
+alias dockerstart="sudo systemctl start docker.service"
+alias dockertag="docker tag $1 $2" # where $1 is local image name and $2 is repo name"
+alias dockerpush="docker push $1" # where $1 is repo name
+
 dockerrmi() {
 	docker rmi -f $(docker images -q)
 }
@@ -136,6 +147,9 @@ moviemv() {
 # Netcat
 alias nclisten="nc -l -p $1" # $1 is port
 alias ncconnect="nc $1 $2" # $1 is host and $2 port
+
+# Aws
+alias setawsacc="export AWS_DEFAULT_PROFILE=$1"
 
 # Misc
 alias clc="clear"
