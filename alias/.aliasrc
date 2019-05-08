@@ -133,5 +133,9 @@ moviemv() {
 	mvmedia avi $dest
 }
 
+# Netcat
+alias nclisten="nc -l -p $1" # $1 is port
+alias ncconnect="nc $1 $2" # $1 is host and $2 port
+
 # Misc
 alias clc="clear"
