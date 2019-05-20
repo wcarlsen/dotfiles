@@ -30,6 +30,9 @@ alias aptu="sudo apt update && sudo apt upgrade -y"
 # Pacman
 alias pacu="sudo pacman -Syu"
 
+# Yay
+alias yayu="yay -Syu"
+
 # Npm
 alias npmlg="npm list -g --depth=0"
 
@@ -153,7 +156,7 @@ alias ncconnect="nc $1 $2" # $1 is host and $2 port
 alias setawsacc="export AWS_DEFAULT_PROFILE=$1"
 
 # Terragrunt
-terragruntoverwrite="terragrunt $1 --terragrunt-source-update --terragrunt-source $2" # $1 is the command and $2 is the path remember / in the end"
+alias terragruntoverwrite="terragrunt $1 --terragrunt-source-update --terragrunt-source $2" # $1 is the command and $2 is the path remember / in the end"
 
 # Misc
 alias clc="clear"
