@@ -18,6 +18,9 @@ alias code="code-insiders ."
 # Hyper
 alias hyperc="nvim ~/.hyper.js"
 
+# Alacritty
+alias alacritrc="nvim ~/.config/alacritty/alacritty.yml"
+
 # Tmux
 alias tmuxcf="nvim ~/.tmux.conf"
 
@@ -154,6 +157,7 @@ alias ncconnect="nc $1 $2" # $1 is host and $2 port
 
 # Aws
 alias setawsacc="export AWS_DEFAULT_PROFILE=$1"
+alias awsrc="nvim ~/.aws/credentials"
 
 # Terragrunt
 alias terragruntoverwrite="terragrunt $1 --terragrunt-source-update --terragrunt-source $2" # $1 is the command and $2 is the path remember / in the end"

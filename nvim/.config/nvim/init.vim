@@ -4,8 +4,8 @@ set background=dark
 set ignorecase
 set nohlsearch
 
-let mapleader = ","
-let maplocalleader = ","
+let mapleader=","
+let maplocalleader=","
 
 set list listchars=nbsp:¬,tab:»·,trail:·,extends:>
 set shiftwidth=4
@@ -32,36 +32,38 @@ Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 Plug 'mileszs/ack.vim'
+Plug 'chiel92/vim-autoformat'
 
 call plug#end()
 
 " Nerdtreee
 map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeWinPos="right"
 
 " Git gutter
-let g:gitgutter_enabled = 1
+let g:gitgutter_enabled=1
 set updatetime=100
 
 " Deoplete
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup=1
 set completeopt-=preview
 
 " Ariline
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline_powerline_fonts = 1
-"let g:airline#extensions#ale#enabled = 1
+"let g:airline#extensions#tabline#enabled=1
+"let g:airline_powerline_fonts=1
+"let g:airline#extensions#ale#enabled=1
 
 " Ale
-let g:ale_list_window_size = 5
-let g:airline#extensions#ale#enabled = 1
+let g:ale_list_window_size=5
+let g:airline#extensions#ale#enabled=1
 "map <leader>e :ALEToggleBuffer<CR>
-"let g:ale_open_list = 1
+"let g:ale_open_list=1
 highlight ALEError ctermbg=DarkMagenta
-let b:ale_linters = ['flake8', 'pylint']
+let b:ale_linters=['flake8', 'pylint']
 
 " Deoplete-jedi
 if (filereadable('Pipfile'))
-	let g:deoplete#sources#jedi#python_path = '.venv/bin/python'
+	let g:deoplete#sources#jedi#python_path='.venv/bin/python'
 endif
 
 " Black
@@ -69,18 +71,20 @@ autocmd BufWritePre *.py execute ':Black'
 
 " Filetype
 autocmd Filetype javascript setlocal sw=2 sts=2 expandtab
+autocmd Filetype json setlocal sw=2 sts=2 expandtab
 autocmd Filetype html setlocal sw=2 sts=2 expandtab
 autocmd Filetype python setlocal sw=4 sts=4 expandtab
 
 " Ctrlp
-let g:ctrlp_show_hidden = 1
+let g:ctrlp_show_hidden=1
 
 " Supertab
-let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabDefaultCompletionType="<c-n>"
 
 " Ack
 if executable('ag')
-	let g:ackprg = 'ag --vimgrep'
+	let g:ackprg='ag --vimgrep'
 endif
 
+" Tags
 noremap <leader>t <c-]>
