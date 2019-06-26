@@ -22,6 +22,9 @@ source ~/.aliasrc
 # Pipenv
 export PIPENV_VENV_IN_PROJECT=1
 
+# Kubectx
+export KUBECONFIG=$HOME/.kube/config_hellman:$HOME/.kube/config_nonprod:$HOME/.kube/config_coke:$HOME/.kube/config_saml:$HOME/.kube/config_testpelle
+
 # Golang
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
