@@ -120,7 +120,7 @@ alias l="exa --long --header --group-directories-first --git -a"
 
 # Docker
 alias dockerstart="sudo systemctl start docker.service"
-alias dockerstart="sudo systemctl stop docker.service"
+alias dockerstop="sudo systemctl stop docker.service"
 alias dockertag="docker tag $1 $2" # where $1 is local image name and $2 is repo name"
 alias dockerpush="docker push $1" # where $1 is repo name
 alias dockerrunprime="docker run -it -v $1:/code -e AWS_ACCESS_KEY_ID=$2 -e AWS_SECRET_ACCESS_KEY=$3 -e TF_VAR_access_key_master=$4 -e TF_VAR_secret_key_master=$5 -e -w=/code --entrypoint /bin/bash dfdsdk/prime-pipeline:$6"
@@ -163,6 +163,9 @@ alias awsrc="nvim ~/.aws/credentials"
 
 # Terragrunt
 alias terragruntoverwrite="terragrunt $1 --terragrunt-source-update --terragrunt-source $2" # $1 is the command and $2 is the path remember / in the end"
+
+# Cat or bat
+alias cat="bat"
 
 # Misc
 alias clc="clear"

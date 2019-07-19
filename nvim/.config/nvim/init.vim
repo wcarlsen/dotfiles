@@ -2,7 +2,7 @@ set number
 set relativenumber
 set background=dark
 set ignorecase
-set nohlsearch
+"set nohlsearch
 
 let mapleader=","
 let maplocalleader=","
@@ -26,13 +26,13 @@ Plug 'ervandew/supertab'
 Plug 'w0rp/ale'
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 Plug 'ambv/black', { 'for': 'python' }
+Plug 'mileszs/ack.vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'omnisharp/omnisharp-vim'
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-Plug 'mileszs/ack.vim'
-Plug 'chiel92/vim-autoformat'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
@@ -49,9 +49,9 @@ let g:deoplete#enable_at_startup=1
 set completeopt-=preview
 
 " Ariline
-"let g:airline#extensions#tabline#enabled=1
-"let g:airline_powerline_fonts=1
-"let g:airline#extensions#ale#enabled=1
+let g:airline#extensions#tabline#enabled=1
+let g:airline_powerline_fonts=1
+let g:airline#extensions#ale#enabled=1
 
 " Ale
 let g:ale_list_window_size=5
@@ -72,6 +72,7 @@ autocmd BufWritePre *.py execute ':Black'
 " Filetype
 autocmd Filetype javascript setlocal sw=2 sts=2 expandtab
 autocmd Filetype json setlocal sw=2 sts=2 expandtab
+autocmd Filetype yaml setlocal sw=2 sts=2 expandtab
 autocmd Filetype html setlocal sw=2 sts=2 expandtab
 autocmd Filetype python setlocal sw=4 sts=4 expandtab
 
