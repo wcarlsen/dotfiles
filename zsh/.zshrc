@@ -1,7 +1,11 @@
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="agnoster"
-DEFAULT_USER="$USER"
+ZSH_THEME="powerlevel9k/powerlevel9k"
+#DEFAULT_USER="$USER"
+
+# Powerlevel9k
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(kubecontext aws docker_machine vcs dir)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 
 plugins=(
 	autojump

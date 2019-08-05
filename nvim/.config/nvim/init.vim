@@ -3,7 +3,6 @@ set relativenumber
 set background=dark
 set ignorecase
 "set nohlsearch
-
 let mapleader=","
 let maplocalleader=","
 
@@ -60,6 +59,15 @@ let g:airline#extensions#ale#enabled=1
 "let g:ale_open_list=1
 highlight ALEError ctermbg=DarkMagenta
 let b:ale_linters=['flake8', 'pylint']
+let g:ale_sign_column_always=1
+let g:ale_set_highlights=0
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+"nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+"nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:ale_open_list = 1
+"let g:ale_list_vertical = 1
 
 " Deoplete-jedi
 if (filereadable('Pipfile'))
@@ -89,3 +97,6 @@ endif
 
 " Tags
 noremap <leader>t <c-]>
+
+" Vimrc
+command Vimrc execute ":e ~/.config/nvim/init.vim"

@@ -165,7 +165,7 @@ alias awsrc="nvim ~/.aws/credentials"
 alias terragruntoverwrite="terragrunt $1 --terragrunt-source-update --terragrunt-source $2" # $1 is the command and $2 is the path remember / in the end"
 
 # Cat or bat
-alias cat="bat"
+alias cat="bat -p"
 
 # Misc
 alias clc="clear"
