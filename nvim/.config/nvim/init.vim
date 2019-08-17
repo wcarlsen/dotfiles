@@ -5,6 +5,7 @@ set ignorecase
 "set nohlsearch
 let mapleader=","
 let maplocalleader=","
+set hidden
 
 set list listchars=nbsp:¬,tab:»·,trail:·,extends:>
 set shiftwidth=4
