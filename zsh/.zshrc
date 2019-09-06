@@ -49,10 +49,10 @@ export KUBECONFIG=${KUBECONFIG[1,-2]}
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
-
-# Az-cli
+# Local bin
 export PATH=$PATH:/home/wcarlsen/bin
 
+# Az-cli
 if hash az 2>/dev/null; then
 	source '/home/wcarlsen/lib/azure-cli/az.completion'
 fi

@@ -84,6 +84,7 @@ autocmd Filetype json setlocal sw=2 sts=2 expandtab
 autocmd Filetype yaml setlocal sw=2 sts=2 expandtab
 autocmd Filetype html setlocal sw=2 sts=2 expandtab
 autocmd Filetype python setlocal sw=4 sts=4 expandtab
+autocmd BufNewFile,BufRead *.cshtml set syntax=html
 
 " Ctrlp
 let g:ctrlp_show_hidden=1

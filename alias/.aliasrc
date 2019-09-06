@@ -182,3 +182,9 @@ alias kx="kubectx"
 
 # Kubens
 alias kb="kubens"
+
+# Fuck
+alias fu="fuck"
+
+# Nautilus
+alias openf="nautilus . &"
