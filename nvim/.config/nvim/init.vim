@@ -6,6 +6,8 @@ set ignorecase
 let mapleader=","
 let maplocalleader=","
 set hidden
+set wrap
+set linebreak
 
 set list listchars=nbsp:¬,tab:»·,trail:·,extends:>
 set shiftwidth=4
