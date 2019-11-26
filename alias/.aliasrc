@@ -35,7 +35,7 @@ alias pacu="sudo pacman -Syu"
 
 # Yay
 alias yayu="yay -Syu"
-alias nay="DOWNGRADE_ALA=1 downgrade $1"
+alias nay="DOWNGRADE_FROM_ALA=1 downgrade $1"
 
 # Npm
 alias npmlg="npm list -g --depth=0"
@@ -187,9 +187,18 @@ alias kx="kubectx"
 # Kubens
 alias kb="kubens"
 
+# Kubectl
+alias kdrainnode="kubectl drain $1 --ignore-daemonsets --delete-local-data --grace-period=30 --timeout=2m --force"
+
 # Fuck
 alias fu="fuck"
 alias plz="fuck"
 
 # Nautilus
 alias openf="nautilus . &"
+
+# Nmap
+alias ipscan="nmap -sn 192.168.1.0/24"
+
+# Youtube-dl
+alias downloadmp3="youtube-dl -x --audio-format mp3 $1"
