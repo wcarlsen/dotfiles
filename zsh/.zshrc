@@ -3,7 +3,7 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="spaceship"
 
 plugins=(
-	#autojump
+	autojump
 	aws
 	git
 	kubectl
@@ -55,7 +55,7 @@ export PATH=$PATH:$HOME/.dotnet/tools
 export MSBuildSDKsPath=/opt/dotnet/sdk/$(dotnet --version)/Sdks
 
 # Fasd
-eval "$(fasd --init auto)"
+#eval "$(fasd --init auto)"
 
 # Fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
