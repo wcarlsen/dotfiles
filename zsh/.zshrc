@@ -1,7 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="spaceship"
-
 plugins=(
 	autojump
 	aws
@@ -11,7 +10,8 @@ plugins=(
 	thefuck
 	docker
 	tmux
-	you-should-use
+	#you-should-use
+	fzf-tab
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -50,9 +50,11 @@ if hash az 2>/dev/null; then
 fi
 
 # Dotnet
-export DOTNET_ROOT=/opt/dotnet
+#export DOTNET_ROOT=/opt/dotnet
+export DOTNET_ROOT=/usr/share/dotnet
 export PATH=$PATH:$HOME/.dotnet/tools
-export MSBuildSDKsPath=/opt/dotnet/sdk/$(dotnet --version)/Sdks
+#export MSBuildSDKsPath=/opt/dotnet/sdk/$(dotnet --version)/Sdks
+export MSBuildSDKsPath=/usr/share/sdk/$(dotnet --version)/Sdks
 
 # Fasd
 #eval "$(fasd --init auto)"

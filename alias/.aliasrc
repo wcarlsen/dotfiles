@@ -2,6 +2,7 @@
 # Zsh
 alias zshrc="nvim ~/.zshrc"
 alias szsh="source ~/.zshrc"
+
 # Alias
 alias aliasrc="nvim ~/.aliasrc"
 
