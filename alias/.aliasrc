@@ -9,11 +9,12 @@ alias aliasrc="nvim ~/.aliasrc"
 # Vim
 alias virc="nvim ~/.config/nvim/init.vim"
 alias vimrc="nvim ~/.config/nvim/init.vim"
-alias nvimrc="nvim ~/.config/nvim/init.vim" alias vi="nvim"
+alias nvimrc="nvim ~/.config/nvim/init.vim"
+alias vi="nvim"
 alias vim="nvim"
 
 # Vscode
-alias code="code-insiders ."
+#alias code="code-insiders ."
 
 # Hyper
 alias hyperc="nvim ~/.hyper.js"
@@ -33,9 +34,31 @@ alias aptu="sudo apt update && sudo apt upgrade -y"
 # Pacman
 alias pacu="sudo pacman -Syu"
 
+pacs() {
+	sudo pacman -Syy $(pacman -Ssq | fzf -m --preview="pacman -Si {}" --preview-window=:hidden --bind=space:toggle-preview)
+}
+
 # Yay
 alias yayu="yay -Syu"
 alias nay="DOWNGRADE_FROM_ALA=1 downgrade $1"
+
+yays() {
+	yay $(yay -Slq | fzf -m --preview="yay -Si {}" --preview-window=:hidden --bind=space:toggle-preview)
+}
+
+yi() { 
+    SELECTED_PKGS="$(yay -Slq | fzf --header='Install packages' -m --preview 'yay -Si {1}')"
+    if [ -n "$SELECTED_PKGS" ]; then
+        yay -S $(echo $SELECTED_PKGS)
+    fi
+}
+
+yr() { 
+    SELECTED_PKGS="$(yay -Qsq | fzf --header='Remove packages' -m --preview 'yay -Si {1}')"
+    if [ -n "$SELECTED_PKGS" ]; then
+        yay -Rns $(echo $SELECTED_PKGS)
+    fi
+}
 
 # Npm
 alias npmlg="npm list -g --depth=0"
@@ -84,10 +107,15 @@ rsrpi() {
 	rsync --remove-source-files -avz -e ssh pi@rpi2.local:/home/pi/torrents/complete/ .
 }
 
+alias rsyncscp="rsync --archive --checksum --compress --human-readable --itemize-changes --rsh=ssh --stats --verbose"
+
 # Ag
 #agcust () {
 	#ag -G \\*."$1" "$2"
 #}
+
+# Grep
+alias grep="grep --color=always"
 
 # Ip
 alias getip="ifconfig | grep 'inet ' | grep -v '127.0.0.1'"
@@ -214,9 +242,20 @@ alias ipscan="nmap -sn 192.168.1.0/24"
 # Youtube-dl
 alias downloadmp3="youtube-dl -x --audio-format mp3 $1"
 
-# Custom autojump
-#zd() {
-	#local dir
-	#dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
+# Pwgen
+alias pw="pwgen -cnys 10"
+
+# Du
+alias duh="du -h -d 0 [^.*]*"
+
+# Xdg-open
+alias open="xdg-open"
+
+# Misc
+#zopen() {
+	#fd -t f -H -I | fzf -m --preview="xdg-mime query default {}" | xargs -ro -d "\n" xdg-open 2>&-
 #}
-#alias j=zd
+
+zcd() {
+	cd $HOME && cd "$(fd -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)"
+}
