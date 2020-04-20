@@ -1,0 +1,31 @@
+{
+  "workbench.startupEditor": "newUntitledFile",
+  "synthwave84.disableGlow": false,
+  "workbench.colorTheme": "SynthWave '84",
+  "editor.wordWrap": "on",
+  "workbench.sideBar.location": "right",
+  "window.zoomLevel": 2,
+  "editor.renderWhitespace": "boundary",
+  "files.trimTrailingWhitespace": true,
+  "python.linting.mypyEnabled": true,
+  "python.formatting.provider": "black",
+  "python.linting.flake8Enabled": true,
+  "python.linting.pylintEnabled": false,
+  "editor.tabSize": 4,
+  "[javascript]": {
+    "editor.tabSize": 2
+  },
+  "[json]": {
+    "editor.tabSize": 2
+  },
+  "[yaml]": {
+    "editor.tabSize": 2
+  },
+  "[html]": {
+    "editor.tabSize": 2
+  },
+  "[python]": {
+    "editor.tabSize": 4
+  }
+}
+
