@@ -29,6 +29,10 @@ export KUBECONFIG=${KUBECONFIG[1,-2]}
 # Pipenv
 export PIPENV_VENV_IN_PROJECT=1
 
+# Go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
 # Remove duplicates and secrets from history
 setopt EXTENDED_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
@@ -38,5 +42,4 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_FIND_NO_DUPS
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_BEEP
-
-export HISTORY_IGNORE="(cat|AWS|SECRET|KEY)"
+export HISTORY_IGNORE="(cat|AWS|SECRET|KEY|base64|secret|export)"

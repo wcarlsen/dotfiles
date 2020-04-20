@@ -196,7 +196,7 @@ alias awsrc="nvim ~/.aws/credentials"
 
 awsasgunhealthy() {
 	NODEID="$1"
-	aws --region eu-west-1 autoscaling set-instance-health --instance-id $NODENAME --health-status Unhealthy
+	aws --region eu-west-1 autoscaling set-instance-health --instance-id $NODEID --health-status Unhealthy
 }
 
 awsgetinstid() {
