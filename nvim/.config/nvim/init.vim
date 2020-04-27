@@ -56,6 +56,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'mileszs/ack.vim'
 Plug 'ervandew/supertab'
 Plug 'w0rp/ale'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 

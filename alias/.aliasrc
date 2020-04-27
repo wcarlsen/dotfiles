@@ -47,17 +47,17 @@ yays() {
 }
 
 yi() { 
-    SELECTED_PKGS="$(yay -Slq | fzf --header='Install packages' -m --preview 'yay -Si {1}')"
-    if [ -n "$SELECTED_PKGS" ]; then
-        yay -S $(echo $SELECTED_PKGS)
-    fi
+	SELECTED_PKGS="$(yay -Slq | fzf --header='Install packages' -m --preview 'yay -Si {1}')"
+	if [ -n "$SELECTED_PKGS" ]; then
+		yay -S $(echo $SELECTED_PKGS)
+	fi
 }
 
 yr() { 
-    SELECTED_PKGS="$(yay -Qsq | fzf --header='Remove packages' -m --preview 'yay -Si {1}')"
-    if [ -n "$SELECTED_PKGS" ]; then
-        yay -Rns $(echo $SELECTED_PKGS)
-    fi
+	SELECTED_PKGS="$(yay -Qsq | fzf --header='Remove packages' -m --preview 'yay -Si {1}')"
+	if [ -n "$SELECTED_PKGS" ]; then
+		yay -Rns $(echo $SELECTED_PKGS)
+	fi
 }
 
 # Npm
