@@ -1,10 +1,10 @@
 # add source ~/.aliasrc to ~/.zshrc
 # Zsh
-alias zshrc="nvim ~/.zshrc"
+alias zshrc="$EDITOR ~/.zshrc"
 alias szsh="source ~/.zshrc"
 
 # Alias
-alias aliasrc="nvim ~/.aliasrc"
+alias aliasrc="$EDITOR ~/.aliasrc"
 
 # Vim
 alias virc="nvim ~/.config/nvim/init.vim"
@@ -13,17 +13,21 @@ alias nvimrc="nvim ~/.config/nvim/init.vim"
 alias vi="nvim"
 alias vim="nvim"
 
+# Nano
+alias nano="nano -l -c"
+alias nanorc="nano ~/.nanorc"
+
 # Vscode
-#alias code="code-insiders ."
+alias code="code-insiders ."
 
 # Hyper
-alias hyperc="nvim ~/.hyper.js"
+alias hyperc="$EDITOR ~/.hyper.js"
 
 # Alacritty
-alias alacritrc="nvim ~/.config/alacritty/alacritty.yml"
+alias alacritrc="$EDITOR ~/.config/alacritty/alacritty.yml"
 
 # Tmux
-alias tmuxcf="nvim ~/.tmux.conf"
+alias tmuxcf="$EDITOR ~/.tmux.conf"
 
 # Brew
 alias brewu="brew update && brew upgrade && brew cleanup"
@@ -70,8 +74,8 @@ ff() {
 
 # Git
 alias gcl="git clean -df"
-alias gitcf="nvim ~/.gitconfig"
-alias gitignore="nvim .gitignore"
+alias gitcf="$EDITOR ~/.gitconfig"
+alias gitignore="$EDITOR .gitignore"
 
 groot() {
 	cd $(git rev-parse --show-toplevel)
@@ -148,7 +152,7 @@ alias mmkdir="mkdir -p"
 alias las="la -S"
 
 # Exa
-alias l="exa --long --header --group-directories-first --git -a"
+# alias l="exa --long --header --group-directories-first --git -a"
 
 # Docker
 alias dockerstart="sudo systemctl start docker.service"
@@ -192,7 +196,7 @@ alias ncconnect="nc $1 $2" # $1 is host and $2 port
 
 # Aws
 alias setawsacc="export AWS_DEFAULT_PROFILE=$1"
-alias awsrc="nvim ~/.aws/credentials"
+alias awsrc="$EDITOR ~/.aws/credentials"
 
 awsasgunhealthy() {
 	NODEID="$1"
@@ -208,17 +212,8 @@ awsgetinstid() {
 alias terragruntoverwrite="terragrunt $1 --terragrunt-source-update --terragrunt-source $2" # $1 is the command and $2 is the path remember / in the end"
 
 # Cat or bat
-alias cat="bat -p"
-alias caty="bat -p -l yaml"
-
-# Todotxt
-alias tadd="todo.sh -t add"
-alias tls="todo.sh ls"
-alias tpri="todo.sh pri"
-alias tdep="todo.sh depri"
-alias tlsp="todo.sh lsp"
-alias tdo="todo.sh do"
-alias tdel="todo.sh del"
+alias cat="batcat -p"
+alias caty="batcat -p -l yaml"
 
 # Kubectx
 alias kx="kubectx"
@@ -238,6 +233,12 @@ alias openf="nautilus . &"
 
 # Nmap
 alias ipscan="nmap -sn 192.168.1.0/24"
+
+# Systemctl
+alias system="systemctl"
+
+# Journalctl
+alias journal="journalctl"
 
 # Youtube-dl
 alias downloadmp3="youtube-dl -x --audio-format mp3 $1"

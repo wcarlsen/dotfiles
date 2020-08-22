@@ -4,7 +4,7 @@
   "workbench.colorTheme": "SynthWave '84",
   "editor.wordWrap": "on",
   "workbench.sideBar.location": "right",
-  "window.zoomLevel": 2,
+  "window.zoomLevel": 0,
   "editor.renderWhitespace": "boundary",
   "files.trimTrailingWhitespace": true,
   "python.linting.mypyEnabled": true,

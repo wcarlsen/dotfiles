@@ -9,7 +9,7 @@ plugins=(git kubectl aws tmux thefuck autojump fzf-tab)
 source $ZSH/oh-my-zsh.sh
 
 # Editor
-export EDITOR=nvim
+export EDITOR=nano
 
 # Aliases
 source $HOME/.aliasrc
@@ -25,6 +25,7 @@ do
 	fi
 done
 export KUBECONFIG=${KUBECONFIG[1,-2]}
+export do="--dry-run=client -o yaml"
 
 # Pipenv
 export PIPENV_VENV_IN_PROJECT=1
