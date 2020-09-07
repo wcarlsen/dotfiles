@@ -3,3 +3,5 @@
 	email = carlsenwilli@gmail.com
 [github]
 	user = wcarlsen
+[pull]
+	rebase = false
