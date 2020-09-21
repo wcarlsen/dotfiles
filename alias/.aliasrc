@@ -18,7 +18,7 @@ alias nano="nano -l -c"
 alias nanorc="nano ~/.nanorc"
 
 # Vscode
-alias code="code-insiders ."
+alias code="code ."
 
 # Hyper
 alias hyperc="$EDITOR ~/.hyper.js"
@@ -212,8 +212,8 @@ awsgetinstid() {
 alias terragruntoverwrite="terragrunt $1 --terragrunt-source-update --terragrunt-source $2" # $1 is the command and $2 is the path remember / in the end"
 
 # Cat or bat
-alias cat="batcat -p"
-alias caty="batcat -p -l yaml"
+alias cat="bat -p"
+alias caty="bat -p -l yaml"
 
 # Kubectx
 alias kx="kubectx"

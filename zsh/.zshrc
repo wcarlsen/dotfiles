@@ -9,7 +9,7 @@ plugins=(git kubectl aws tmux thefuck autojump fzf-tab)
 source $ZSH/oh-my-zsh.sh
 
 # Editor
-export EDITOR=nano
+export EDITOR=nvim
 
 # Aliases
 source $HOME/.aliasrc
