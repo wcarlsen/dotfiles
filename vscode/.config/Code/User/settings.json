@@ -4,7 +4,7 @@
   "workbench.colorTheme": "SynthWave '84",
   "editor.wordWrap": "on",
   "workbench.sideBar.location": "right",
-  "window.zoomLevel": 0,
+  "window.zoomLevel": 1,
   "editor.renderWhitespace": "boundary",
   "files.trimTrailingWhitespace": true,
   "files.associations": {
@@ -29,6 +29,9 @@
   },
   "[python]": {
     "editor.tabSize": 4
+  },
+  "[terraform]": {
+    "editor.tabSize": 2
   },
   "go.formatTool": "gofmt",
   "go.useLanguageServer": true

@@ -148,6 +148,9 @@ alias scp2local="scp $1:$2 $3" # scp {{remote_host}}:{{/path/remote_file}} {{/pa
 # Mkdir
 alias mmkdir="mkdir -p"
 
+# Terragrunt cache
+alias rmcache="sudo rm -rf **/.terragrunt-cache"
+
 # Ls
 alias las="la -S"
 

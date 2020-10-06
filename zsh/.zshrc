@@ -4,7 +4,7 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="agnoster"
 DEFAULT_USER="$USER"
 
-plugins=(git kubectl aws tmux thefuck autojump fzf-tab)
+plugins=(git kubectl aws tmux thefuck autojump fzf-tab terraform)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -15,16 +15,7 @@ export EDITOR=nvim
 source $HOME/.aliasrc
 
 # Kubernetes contexts
-export KUBECONFIG=""
-for entry in "$HOME/.kube"/*
-do
-	if [[ $entry = *config_* ]]
-	then
-		KUBECONFIG+="$entry"
-		KUBECONFIG+=":"
-	fi
-done
-export KUBECONFIG=${KUBECONFIG[1,-2]}
+export KUBECONFIG=$(ls $HOME/.kube/config_* | tr '\n' ':')
 export do="--dry-run=client -o yaml"
 
 # Pipenv

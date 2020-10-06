@@ -1,6 +1,9 @@
 " Title
 set title
 
+" Mouse
+set mouse=a
+
 " Background color
 set background=dark
 
@@ -26,6 +29,10 @@ set bs=2
 let mapleader=","
 let maplocalleader=","
 
+" Split
+set splitbelow
+set splitright
+
 " Word wrap
 set wrap
 set linebreak
@@ -44,6 +51,7 @@ au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml
 autocmd Filetype yaml setlocal sw=2 sts=2 ts=2 expandtab indentkeys-=<:>
 autocmd Filetype html setlocal sw=2 sts=2 expandtab
 autocmd Filetype python setlocal sw=4 sts=4 expandtab
+au! BufNewFile,BufReadPost *.{tf,tfvars,hcl} setlocal sw=2 sts=2 expandtab
 
 " Plugins
 call plug#begin('~/.vim/plugged')
@@ -57,6 +65,7 @@ Plug 'mileszs/ack.vim'
 Plug 'ervandew/supertab'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-surround'
+Plug 'hashivim/vim-terraform'
 
 call plug#end()
 
@@ -78,3 +87,6 @@ let g:SuperTabDefaultCompletionType="<c-n>"
 if executable('ag')
 	"let g:ackprg='ag --vimgrep'
 endif
+
+" Vim-terraform
+let g:terraform_align=1
