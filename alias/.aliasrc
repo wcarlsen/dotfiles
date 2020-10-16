@@ -155,7 +155,7 @@ alias rmcache="sudo rm -rf **/.terragrunt-cache"
 alias las="la -S"
 
 # Exa
-# alias l="exa --long --header --group-directories-first --git -a"
+alias l="exa --long --header --group-directories-first --git -a"
 
 # Docker
 alias dockerstart="sudo systemctl start docker.service"
@@ -215,8 +215,8 @@ awsgetinstid() {
 alias terragruntoverwrite="terragrunt $1 --terragrunt-source-update --terragrunt-source $2" # $1 is the command and $2 is the path remember / in the end"
 
 # Cat or bat
-alias cat="bat -p"
-alias caty="bat -p -l yaml"
+alias bat="bat -p"
+alias baty="bat -p -l yaml"
 
 # Kubectx
 alias kx="kubectx"
