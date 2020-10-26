@@ -66,6 +66,7 @@ Plug 'ervandew/supertab'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-surround'
 Plug 'hashivim/vim-terraform'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
 

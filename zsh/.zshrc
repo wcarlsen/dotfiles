@@ -31,6 +31,9 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 # Dotnet
 export PATH=$PATH:$HOME/.dotnet/tools
 
+# Saml2aws
+export AWS_PROFILE=saml
+
 # Remove duplicates and secrets from history
 setopt EXTENDED_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
