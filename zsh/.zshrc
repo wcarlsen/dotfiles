@@ -4,7 +4,7 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="agnoster"
 DEFAULT_USER="$USER"
 
-plugins=(git kubectl aws tmux thefuck autojump terraform history zsh-autosuggestions fzf-tab)
+plugins=(git kubectl aws tmux thefuck terraform history zsh-autosuggestions fzf-tab)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -13,9 +13,6 @@ export EDITOR=nvim
 
 # Aliases
 source $HOME/.aliasrc
-
-# Tmux
-ZSH_TMUX_AUTOSTART=true
 
 # Kubernetes contexts
 export KUBECONFIG=$(ls $HOME/.kube/config_* | tr '\n' ':')
@@ -30,9 +27,6 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # Dotnet
 export PATH=$PATH:$HOME/.dotnet/tools
-
-# Saml2aws
-export AWS_PROFILE=saml
 
 # Remove duplicates and secrets from history
 setopt EXTENDED_HISTORY

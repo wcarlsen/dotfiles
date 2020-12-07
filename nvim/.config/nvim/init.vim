@@ -51,11 +51,13 @@ au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml
 autocmd Filetype yaml setlocal sw=2 sts=2 ts=2 expandtab indentkeys-=<:>
 autocmd Filetype html setlocal sw=2 sts=2 expandtab
 autocmd Filetype python setlocal sw=4 sts=4 expandtab
-au! BufNewFile,BufReadPost *.{tf,tfvars,hcl} setlocal sw=2 sts=2 expandtab
+au! BufNewFile,BufReadPost *.{tf,tfvars,hcl} setlocal sw=2 sts=2 expandtab filetype=terraform
 
 " Plugins
 call plug#begin('~/.vim/plugged')
 
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree', { 'do': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -63,12 +65,16 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'mileszs/ack.vim'
 Plug 'ervandew/supertab'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'tpope/vim-surround'
 Plug 'hashivim/vim-terraform'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
+
+" Airline
+let g:airline#extensions#tabline#enabled=1
+let g:airline_powerline_fonts=1
 
 " Nerdtreee
 map <C-n> :NERDTreeToggle<CR>
@@ -84,9 +90,12 @@ let g:ctrlp_show_hidden=1
 " Supertab
 let g:SuperTabDefaultCompletionType="<c-n>"
 
+" Ale
+let g:ale_open_list=1
+
 " Ack
 if executable('ag')
-	"let g:ackprg='ag --vimgrep'
+	let g:ackprg='ag --vimgrep'
 endif
 
 " Vim-terraform
