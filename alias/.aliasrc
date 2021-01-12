@@ -13,6 +13,9 @@ alias nvimrc="nvim ~/.config/nvim/init.vim"
 alias vi="nvim"
 alias vim="nvim"
 
+# Mutt
+alias muttrc="nvim ~/.mutt/muttrc"
+
 # Nano
 alias nano="nano -l -c"
 alias nanorc="nano ~/.nanorc"
@@ -91,8 +94,8 @@ push2prod() {
 	git checkout master
 }
 
-alias excuse="curl -s https://whatthecommit.com/index.txt"
-alias yolo="git commit -m '$(curl -s https://whatthecommit.com/index.txt)'"
+alias excuse="curl -s http://whatthecommit.com/index.txt"
+alias yolo="git commit -m '$(curl -s http://whatthecommit.com/index.txt)'"
 
 # Ctags
 tags() {
