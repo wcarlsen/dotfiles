@@ -96,6 +96,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " remember pip3 install --user pynvim
 Plug 'SirVer/ultisnips'
 Plug 'evanleck/vim-svelte'
+Plug 'tpope/vim-sleuth'
 
 call plug#end()
 
