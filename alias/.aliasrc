@@ -7,36 +7,18 @@ alias szsh="source ~/.zshrc"
 alias aliasrc="$EDITOR ~/.aliasrc"
 
 # Vim
-alias virc="nvim ~/.config/nvim/init.vim"
-alias vimrc="nvim ~/.config/nvim/init.vim"
+alias vimrc=vim ~/.vim/vimrc"
 alias nvimrc="nvim ~/.config/nvim/init.vim"
-alias vi="nvim"
-alias vim="nvim"
-
-# Mutt
-alias muttrc="nvim ~/.mutt/muttrc"
+alias vi="vim"
 
 # Nano
 alias nano="nano -l -c"
-alias nanorc="nano ~/.nanorc"
 
 # Vscode
 alias code="code ."
 
-# Hyper
-alias hyperc="$EDITOR ~/.hyper.js"
-
-# Alacritty
-alias alacritrc="$EDITOR ~/.config/alacritty/alacritty.yml"
-
 # Tmux
 alias tmuxcf="$EDITOR ~/.tmux.conf"
-
-# Brew
-alias brewu="brew update && brew upgrade && brew cleanup"
-
-# Apt
-alias aptu="sudo apt update && sudo apt upgrade -y"
 
 # Pacman
 alias pacu="sudo pacman -Syu"

@@ -4,23 +4,23 @@ export ZSH="$HOME/.oh-my-zsh"
 #ZSH_THEME="agnoster"
 #DEFAULT_USER="$USER"
 
-autoload -Uz vcs_info
-precmd_vcs_info() { vcs_info }
-precmd_functions+=( precmd_vcs_info )
-setopt prompt_subst
-RPROMPT=\$vcs_info_msg_0_
-zstyle ':vcs_info:git:*' formats '%F{240}(%b)%r%f'
-zstyle ':vcs_info:*' enable git
+# autoload -Uz vcs_info
+# precmd_vcs_info() { vcs_info }
+# precmd_functions+=( precmd_vcs_info )
+# setopt prompt_subst
+# RPROMPT=\$vcs_info_msg_0_
+# zstyle ':vcs_info:git:*' formats '%F{240}(%b)%r%f'
+# zstyle ':vcs_info:*' enable git
 
 autoload -U promptinit && promptinit
 prompt fade red
 
-plugins=(git autojump kubectl aws tmux thefuck terraform history zsh-autosuggestions fzf-tab tmuxinator)
+plugins=(git autojump kubectl aws tmux thefuck terraform history zsh-autosuggestions fzf fzf-tab tmuxinator)
 
 source $ZSH/oh-my-zsh.sh
 
 # Editor
-export EDITOR=nvim
+export EDITOR=vim
 
 # Aliases
 source $HOME/.aliasrc
