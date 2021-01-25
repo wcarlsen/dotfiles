@@ -5,68 +5,68 @@ set backspace=indent,eol,start
 set hidden
 set noswapfile
 set path+=**
-set wildmode=full                                                                     
-set wildmenu                                                          
-set encoding=utf-8              
-set showmatch                   
+set wildmode=full
+set wildmenu
+set encoding=utf-8
+set showmatch
 set background=dark
 
-"Statusline                     
-set laststatus=2                
+"Statusline
+set laststatus=2
 
-" Searching                     
-set ignorecase                  
-set incsearch                   
-set hlsearch                    
+" Searching
+set ignorecase
+set incsearch
+set hlsearch
 
-" Splits behavior               
-set splitbelow                  
-set splitright                  
+" Splits behavior
+set splitbelow
+set splitright
 
-" Word wrap                     
-set wrap                        
-set linebreak                   
+" Word wrap
+set wrap
+set linebreak
 
-" Term escape enters normal mode                                                                                                            
-tnoremap <Esc> <C-\><C-n>                                                                                                                   
+" Term escape enters normal mode
+tnoremap <Esc> <C-\><C-n>
 
-" Netrw                                                                                                                                     
-let g:netrw_banner=0                                                                                                                        
-let g:netrw_liststyle=3                                                                                                                     
-let g:netrw_list_hide=netrw_gitignore#Hide()                                                                                                
+" Netrw
+let g:netrw_banner=0
+let g:netrw_liststyle=3
+let g:netrw_list_hide=netrw_gitignore#Hide()
 
-" Automatically install vim-plug                                                                                                            
-if empty(glob('~/.vim/autoload/plug.vim'))                                                                                                  
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs                                                                                  
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim                                                                   
-  autocmd VimEnter * PlugInstall | source $MYVIMRC                                                                                          
-endif                                                                                                                                       
+" Automatically install vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
 
-" Plugins                                                                                                                                   
-call plug#begin('~/.vim/plugged')                                                                                                           
+" Plugins
+call plug#begin('~/.vim/plugged')
 
-" Auto adjust indentation                                                                                                                   
-Plug 'tpope/vim sleuth'                                                                                                                     
+" Auto adjust indentation
+Plug 'tpope/vim-sleuth'
 
-" Language pack                                                                                                                             
-Plug 'sheerun/vim-polyglot'                                                                                                                 
+" Language pack
+Plug 'sheerun/vim-polyglot'
 
-" Git                                                                                                                                       
-Plug 'tpope/vim-fugitive'                                                                                                                   
+" Git
+Plug 'tpope/vim-fugitive'
+
+" Commenting
+Plug 'tpope/vim-commentary'
 Plug 'airblade/vim-gitgutter'
-
-" Commenting                                                                                                                                
-Plug 'tpope/vim-commentary'                                                                                                                 
 
 " Terraform
 Plug 'hashivim/vim-terraform'
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
 
-call plug#end()                                                                                                                             
+call plug#end()
 
-" Install missing plugins on startup                                                                                                        
-autocmd VimEnter *                                                                                                                          
-  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))                                                                             
-  \|   PlugInstall --sync | q                                                                                                               
+" Install missing plugins on startup
+autocmd VimEnter *
+  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \|   PlugInstall --sync | q
   \| endif
