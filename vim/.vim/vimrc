@@ -53,10 +53,10 @@ Plug 'sheerun/vim-polyglot'
 
 " Git
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 " Commenting
 Plug 'tpope/vim-commentary'
-Plug 'airblade/vim-gitgutter'
 
 " Terraform
 Plug 'hashivim/vim-terraform'

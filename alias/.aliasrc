@@ -7,7 +7,7 @@ alias szsh="source ~/.zshrc"
 alias aliasrc="$EDITOR ~/.aliasrc"
 
 # Vim
-alias vimrc=vim ~/.vim/vimrc"
+alias vimrc="vim ~/.vim/vimrc"
 alias nvimrc="nvim ~/.config/nvim/init.vim"
 alias vi="vim"
 
