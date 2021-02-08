@@ -26,7 +26,7 @@ export EDITOR=vim
 source $HOME/.aliasrc
 
 # Kubernetes contexts
-export KUBECONFIG=$(ls $HOME/.kube/config_* | tr '\n' ':')
+export KUBECONFIG=$(ls $HOME/.kube/config* | tr '\n' ':')
 export do="--dry-run=client -o yaml"
 
 # Pipenv

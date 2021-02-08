@@ -28,7 +28,6 @@ pacs() {
 }
 
 # Yay
-alias yayu="yay -Syu"
 alias nay="DOWNGRADE_FROM_ALA=1 downgrade $1"
 
 yays() {

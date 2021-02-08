@@ -3,13 +3,18 @@ filetype plugin indent on
 syntax on
 set backspace=indent,eol,start
 set hidden
+set nobackup
+set nowritebackup
 set noswapfile
 set path+=**
-set wildmode=full
+set wildmode=longest,list,full
 set wildmenu
 set encoding=utf-8
 set showmatch
 set background=dark
+" set paste
+set ruler
+" set relativenumber
 
 "Statusline
 set laststatus=2
@@ -58,10 +63,43 @@ Plug 'airblade/vim-gitgutter'
 " Commenting
 Plug 'tpope/vim-commentary'
 
+" File explorer
+Plug 'preservim/nerdtree'
+let g:NERDTreeWinPos="right"
+let NERDTreeMinimalUI=1
+nnoremap <C-t> :NERDTreeToggle<CR>:NERDTreeRefreshRoot<CR>:wincmd p<CR>
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+    \ quit | endif
+
+" File navigation
+Plug 'ctrlpvim/ctrlp.vim'
+
+" Supertab
+Plug 'ervandew/supertab'
+let g:SuperTabDefaultCompletionType="context"
+
+" Lining
+Plug 'dense-analysis/ale'
+let g:airline#extensions#ale#enabled=1
+let g:ale_sign_column_always=1
+let g:ale_fix_on_save=1
+
 " Terraform
 Plug 'hashivim/vim-terraform'
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
+
+" Markdown
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_new_list_item_indent=0
+let g:vim_markdown_auto_insert_bullets=1
+
+" Svelte
+Plug 'evanleck/vim-svelte', {'branch': 'main'}
+let g:svelte_indent_script=0
+let g:svelte_indent_style=0
 
 call plug#end()
 
