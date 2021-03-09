@@ -7,9 +7,10 @@ alias szsh="source ~/.zshrc"
 alias aliasrc="$EDITOR ~/.aliasrc"
 
 # Vim
-alias vimrc="vim ~/.vim/vimrc"
-alias nvimrc="nvim ~/.config/nvim/init.vim"
-alias vi="vim"
+alias vimrc="$EDITOR ~/.vim/vimrc"
+alias nvimrc="$EDITOR ~/.config/nvim/init.vim"
+alias vim="$EDITOR"
+alias vi="$EDITOR"
 
 # Nano
 alias nano="nano -l -c"

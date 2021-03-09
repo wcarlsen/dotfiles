@@ -20,7 +20,7 @@ plugins=(git autojump kubectl aws tmux thefuck terraform history zsh-autosuggest
 source $ZSH/oh-my-zsh.sh
 
 # Editor
-export EDITOR=vim
+export EDITOR=nvim
 
 # Aliases
 source $HOME/.aliasrc
