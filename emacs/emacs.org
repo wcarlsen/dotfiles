@@ -45,11 +45,43 @@ Disable stupid backup/swap files.
 (setq auto-save-default nil)
 #+end_src
 
+** Line highlight
+Highlight current line.
+
+#+begin_src emacs-lisp
+(global-hl-line-mode t)
+#+end_src
+
 ** Sounds
 Disable ring bell.
 
 #+begin_src emacs-lisp
 (setq ring-bell-function 'ignore)
+#+end_src
+
+** Font size
+Set font size.
+
+#+begin_src emacs-lisp
+(set-face-attribute 'default nil :height 110)
+#+end_src
+
+* Vim bindings
+** Evil
+Vim keybindings.
+
+#+begin_src emacs-lisp
+(use-package evil
+  :config
+  (evil-mode 1))
+#+end_src
+** Evil-commentary
+Easy comment out stuff.
+
+#+begin_src emacs-lisp
+(use-package evil-commentary
+  :config
+  (evil-commentary-mode))
 #+end_src
 
 * Org
@@ -84,6 +116,7 @@ Autotangle configuration files.
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 #+end_src
+
 * Git
 ** Magit
 Git user interface.
@@ -95,17 +128,17 @@ Git user interface.
 Visual representation of changes to files in git.
 
 #+begin_src emacs-lisp
-(use-package git-gutter
-  :config
-  (global-git-gutter-mode +1)
-  (custom-set-variables '(git-gutter:update-interval 2))
-  (custom-set-variables
-  '(git-gutter:modified-sign "~")
-  '(git-gutter:added-sign "+")
-  '(git-gutter:deleted-sign "-"))
-  (set-face-background 'git-gutter:modified "yellow")
-  (set-face-foreground 'git-gutter:added "green")
-  (set-face-foreground 'git-gutter:deleted "red"))
+  (use-package git-gutter
+    :config
+    (global-git-gutter-mode +1)
+    (custom-set-variables '(git-gutter:update-interval 2)))
+    ;; (custom-set-variables
+    ;; '(git-gutter:modified-sign "~")))
+    ;; '(git-gutter:added-sign "+")
+    ;; '(git-gutter:deleted-sign "-"))
+    ;; (set-face-background 'git-gutter:modified "yellow"))
+    ;; (set-face-foreground 'git-gutter:added "green")
+    ;; (set-face-foreground 'git-gutter:deleted "red"))
 #+end_src
 
 * Project management
@@ -118,8 +151,63 @@ Setup project interaction libary for accessing multiple projects.
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (setq projectile-project-search-path 
-  '("~/" "~/spaghetti/" "~/spaghetti/dfds/"))
+  '("~/" "~/spaghetti/private/" "~/spaghetti/dfds/"))
   (projectile-discover-projects-in-search-path))
+#+end_src
+
+* Snippets
+** Yansnippet
+Snippet template system.
+
+#+begin_src emacs-lisp
+(use-package yasnippet
+  :config
+  (yas-global-mode 1))
+#+end_src
+
+** Yasnippet-snippets
+Snippet collection.
+
+#+begin_src emacs-lisp
+(use-package yasnippet-snippets)
+#+end_src
+
+* Auto complete
+** Company-mode
+Completion framework.
+
+#+begin_src emacs-lisp
+(use-package company
+  :config
+  (setq company-idle-delay 0.0)
+  (setq company-minimum-prefix-length 1)
+  (global-company-mode t))
+#+end_src
+
+Add yasnippet to all company backends.
+
+#+begin_src emacs-lisp
+  ;; (defun mars/company-backend-with-yas (backends)
+  ;;       "Add :with company-yasnippet to company BACKENDS.
+  ;; Taken from https://github.com/syl20bnr/spacemacs/pull/179."
+  ;;       (if (and (listp backends) (memq 'company-yasnippet backends))
+  ;; 	  backends
+  ;; 	(append (if (consp backends)
+  ;; 		    backends
+  ;; 		  (list backends))
+  ;; 		'(:with company-yasnippet))))
+
+  ;;     ;; add yasnippet to all backends
+  ;;     (setq company-backends
+  ;;           (mapcar #'mars/company-backend-with-yas company-backends))
+#+end_src
+
+Documentation pop-up.
+
+#+begin_src emacs-lisp
+  (use-package company-quickhelp
+    :config
+    (company-quickhelp-mode))
 #+end_src
 
 * Languages
@@ -130,10 +218,129 @@ Terraform hcl syntax goodies.
 (use-package terraform-mode)
 #+end_src
 
-* Theme
-** Wombat
-Setup dark theme.
+** Yaml
+Basic major mode for editing YAML.
 
 #+begin_src emacs-lisp
-(load-theme 'wombat t)
+(use-package yaml-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+  (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
+  (add-hook 'yaml-mode-hook
+  '(lambda ()
+    (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 #+end_src
+
+* Syntax checking
+** Flycheck
+Syntax checking.
+
+#+begin_src emacs-lisp
+(use-package flycheck
+  :init (global-flycheck-mode))
+#+end_src
+
+* Terminal
+** Multiterm
+Managing multiple terminals.
+
+#+begin_src emacs-lisp
+(use-package multi-term
+  :config
+  (setq multi-term-program "/bin/zsh"))
+#+end_src
+
+* File explorer
+** Treemacs
+File and project explorer.
+
+#+begin_src emacs-lisp
+(use-package treemacs
+  :bind
+  (:map global-map
+  ("C-x t t" . treemacs))
+  :config
+  (setq treemacs-position 'right)
+  (treemacs-follow-mode t)
+  (treemacs-filewatch-mode t))
+#+end_src
+
+Treemacs evil evil.
+
+#+begin_src emacs-lisp
+(use-package treemacs-evil
+  :after (treemacs evil))
+#+end_src
+
+Treemacs projectile plugin.
+
+#+begin_src emacs-lisp
+(use-package treemacs-projectile
+  :after (treemacs projectile))
+#+end_src
+
+Treemacs magit plugin.
+
+#+begin_src emacs-lisp
+(use-package treemacs-magit
+  :after (treemacs magit))
+#+end_src
+
+Treemacs icons.
+#+begin_src emacs-lisp
+(use-package treemacs-icons-dired
+  :after (treemacs dired)
+  :config (treemacs-icons-dired-mode))
+#+end_src
+* Themes
+** Spacemacs theme
+Use the nice spacemacs theme.
+
+#+begin_src emacs-lisp
+(use-package spacemacs-theme
+  :defer t
+  :init (load-theme 'spacemacs-dark t))
+#+end_src
+
+* Mode line
+** Spaceline
+Beautiful modeline.
+
+#+begin_src emacs-lisp
+(use-package spaceline
+  :config
+  (require 'spaceline-config)
+  (setq powerline-default-separator 'wave)
+  (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+  (spaceline-spacemacs-theme))
+#+end_src
+ 
+* Misc
+** Exec path from shell
+Ensure environment varibles in emacs and shell is the same.
+
+#+begin_src emacs-lisp
+(use-package exec-path-from-shell)
+#+end_src
+
+** Anzu
+Display current search match and nice query replace.
+
+#+begin_src emacs-lisp
+(use-package anzu
+  :config
+  (global-set-key [remap query-replace] 'anzu-query-replace)
+  (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
+  (global-anzu-mode +1))
+#+end_src
+
+** Which key
+Displays keybindings hints.
+
+#+begin_src emacs-lisp
+(use-package which-key
+  :config
+  (setq which-key-idle-delay 0.0)6
+  (which-key-mode))
+#+end_src
+
