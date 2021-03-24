@@ -124,6 +124,7 @@ Git user interface.
 #+begin_src emacs-lisp
 (use-package magit)
 #+end_src
+
 ** Git-gutter
 Visual representation of changes to files in git.
 
@@ -172,16 +173,43 @@ Snippet collection.
 (use-package yasnippet-snippets)
 #+end_src
 
+* Language server
+** Lsp-mode
+IDE like experience.
+
+#+begin_src emacs-lisp
+(use-package lsp-mode
+  :init (setq lsp-keymap-prefix "C-c l")
+  :hook (lsp-mode . lsp-enable-which-key-integration)
+  :commands (lsp lsp-deferred))
+#+end_src
+
+UI.
+
+#+begin_src emacs-lisp
+(use-package lsp-ui
+  :commands (lsp-ui-mode))
+#+end_src
+
 * Auto complete
 ** Company-mode
 Completion framework.
 
 #+begin_src emacs-lisp
-(use-package company
-  :config
-  (setq company-idle-delay 0.0)
-  (setq company-minimum-prefix-length 1)
-  (global-company-mode t))
+    ;; (use-package company
+    ;;   :config
+    ;;   (setq company-idle-delay 0.0)
+    ;;   (setq company-minimum-prefix-length 1)
+    ;;   (global-company-mode t))
+  (use-package company
+    :after lsp-mode
+    :hook (lsp-mode . company)
+    :bind
+    (:map company-active-map ("<tab>" . company-complete-selection))
+    (:map lsp-mode-map ("<tab>" . company-indent-or-complete-common))
+    :custom
+    (setq company-idle-delay 0.0)
+    (setq company-minimum-prefix-length 1))
 #+end_src
 
 Add yasnippet to all company backends.
@@ -205,9 +233,9 @@ Add yasnippet to all company backends.
 Documentation pop-up.
 
 #+begin_src emacs-lisp
-  (use-package company-quickhelp
-    :config
-    (company-quickhelp-mode))
+  ;; (use-package company-quickhelp
+  ;;   :config
+  ;;   (company-quickhelp-mode))
 #+end_src
 
 * Languages
@@ -216,6 +244,17 @@ Terraform hcl syntax goodies.
 
 #+begin_src emacs-lisp
 (use-package terraform-mode)
+#+end_src
+
+Lsp.
+
+#+begin_src emacs-lisp
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection '("/path/to/terraform-ls/terraform-ls" "serve"))
+                    :major-modes '(terraform-mode)
+                    :server-id 'terraform-ls))
+
+  (add-hook 'terraform-mode-hook #'lsp)
 #+end_src
 
 ** Yaml
@@ -259,7 +298,7 @@ File and project explorer.
   :bind
   (:map global-map
   ("C-x t t" . treemacs))
-  :config
+ :config
   (setq treemacs-position 'right)
   (treemacs-follow-mode t)
   (treemacs-filewatch-mode t))

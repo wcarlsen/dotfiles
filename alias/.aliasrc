@@ -1,4 +1,5 @@
 # add source ~/.aliasrc to ~/.zshrc
+
 # Zsh
 alias zshrc="$EDITOR ~/.zshrc"
 alias szsh="source ~/.zshrc"
@@ -7,10 +8,10 @@ alias szsh="source ~/.zshrc"
 alias aliasrc="$EDITOR ~/.aliasrc"
 
 # Vim
-alias vimrc="$EDITOR ~/.vim/vimrc"
-alias nvimrc="$EDITOR ~/.config/nvim/init.vim"
-alias vim="$EDITOR"
 alias vi="$EDITOR"
+alias vim="$EDITOR"
+alias vimrc="cd ~/.config/nvim/ && $EDITOR ."
+alias nvimrc="cd ~/.config/nvim/ && $EDITOR ."
 
 # Nano
 alias nano="nano -l -c"
@@ -33,20 +34,6 @@ alias nay="DOWNGRADE_FROM_ALA=1 downgrade $1"
 
 yays() {
 	yay $(yay -Slq | fzf -m --preview="yay -Si {}" --preview-window=:hidden --bind=space:toggle-preview)
-}
-
-yi() { 
-	SELECTED_PKGS="$(yay -Slq | fzf --header='Install packages' -m --preview 'yay -Si {1}')"
-	if [ -n "$SELECTED_PKGS" ]; then
-		yay -S $(echo $SELECTED_PKGS)
-	fi
-}
-
-yr() { 
-	SELECTED_PKGS="$(yay -Qsq | fzf --header='Remove packages' -m --preview 'yay -Si {1}')"
-	if [ -n "$SELECTED_PKGS" ]; then
-		yay -Rns $(echo $SELECTED_PKGS)
-	fi
 }
 
 # Npm
@@ -76,7 +63,6 @@ push2prod() {
 	git checkout master
 }
 
-alias excuse="curl -s http://whatthecommit.com/index.txt"
 alias yolo="git commit -m '$(curl -s http://whatthecommit.com/index.txt)'"
 
 # Ctags
@@ -98,21 +84,15 @@ rsrpi() {
 
 alias rsyncscp="rsync --archive --checksum --compress --human-readable --itemize-changes --rsh=ssh --stats --verbose"
 
-# Ag
-#agcust () {
-	#ag -G \\*."$1" "$2"
-#}
-
 # Grep
 alias grep="grep --color=always"
 
 # Ip
-alias getip="ifconfig | grep 'inet ' | grep -v '127.0.0.1'"
+alias getip="ip a | grep 'inet ' | grep -v '127.0.0.1'"
 
 # Python
 alias actenv="source .venv/bin/activate"
 alias setupenv="virtualenv -p python3 .venv"
-alias prun="pipenv run"
 
 # Oh-my-zsh plugins
 findalias () {
@@ -123,8 +103,6 @@ findalias () {
 removessh () {
 	ssh-keygen -R "$1"
 }
-
-alias rpi2="ssh pi@rpi2.local"
 
 # Scp
 alias scp2remote="scp $1 $2:$3" # scp {{local_file}} {{remote_host}}:{{/path/remote_file}}
@@ -168,19 +146,6 @@ dockerrenv() {
 	docker run -p "$1" --env-file ./"$2" "$3"
 }
 
-# Mv
-mvmedia() {
-	mv -v **/*."$1" "$2" 2>/dev/null
-}
-
-moviemv() {
-	dest=~/Movies/movies/
-	mvmedia mp4 $dest mvmedia mkv $dest mvmedia avi $dest
-}
-
-# Netcat
-alias nclisten="nc -l -p $1" # $1 is port
-alias ncconnect="nc $1 $2" # $1 is host and $2 port
 
 # Aws
 alias setawsacc="export AWS_DEFAULT_PROFILE=$1"
@@ -239,12 +204,3 @@ alias duh="du -h -d 0 [^.*]*"
 
 # Xdg-open
 alias open="xdg-open"
-
-# Misc
-#zopen() {
-	#fd -t f -H -I | fzf -m --preview="xdg-mime query default {}" | xargs -ro -d "\n" xdg-open 2>&-
-#}
-
-zcd() {
-	cd $HOME && cd "$(fd -t d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)"
-}

@@ -1,8 +1,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-#ZSH_THEME="agnoster"
-#DEFAULT_USER="$USER"
+ZSH_THEME="agnoster"
+DEFAULT_USER="$USER"
 
 # autoload -Uz vcs_info
 # precmd_vcs_info() { vcs_info }
@@ -12,8 +12,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # zstyle ':vcs_info:git:*' formats '%F{240}(%b)%r%f'
 # zstyle ':vcs_info:*' enable git
 
-autoload -U promptinit && promptinit
-prompt fade green
+# autoload -U promptinit && promptinit
+# prompt fade red
 
 plugins=(git autojump kubectl aws tmux thefuck terraform history zsh-autosuggestions fzf fzf-tab tmuxinator)
 
@@ -31,7 +31,6 @@ export do="--dry-run=client -o yaml"
 
 # Pipenv
 export PIPENV_VENV_IN_PROJECT=1
-export PATH=$PATH:$HOME/.local/bin
 
 # Go
 export GOPATH=$HOME/go
