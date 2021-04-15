@@ -75,6 +75,7 @@ Vim keybindings.
   :config
   (evil-mode 1))
 #+end_src
+
 ** Evil-commentary
 Easy comment out stuff.
 
@@ -331,6 +332,7 @@ Treemacs icons.
   :after (treemacs dired)
   :config (treemacs-icons-dired-mode))
 #+end_src
+
 * Themes
 ** Spacemacs theme
 Use the nice spacemacs theme.
@@ -379,7 +381,7 @@ Displays keybindings hints.
 #+begin_src emacs-lisp
 (use-package which-key
   :config
-  (setq which-key-idle-delay 0.0)6
+  (setq which-key-idle-delay 0.0)
   (which-key-mode))
 #+end_src
 
