@@ -32,6 +32,9 @@ export do="--dry-run=client -o yaml"
 # Pipenv
 export PIPENV_VENV_IN_PROJECT=1
 
+# Pip
+export PATH=$PATH:$HOME/.local/bin
+
 # Go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin

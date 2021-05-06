@@ -118,7 +118,7 @@ alias rmcache="sudo rm -rf **/.terragrunt-cache"
 alias las="la -S"
 
 # Exa
-alias l="exa --long --header --group-directories-first --git -a"
+alias l="exa --long --header --group-directories-first --git -a --icons"
 
 # Docker
 alias dockerstart="sudo systemctl start docker.service"
@@ -166,7 +166,7 @@ alias terragruntoverwrite="terragrunt $1 --terragrunt-source-update --terragrunt
 
 # Cat or bat
 alias cat="bat -p"
-alias caty="bat -p -l yaml"
+# alias caty="bat -p -l yaml"
 
 # Kubectx
 alias kx="kubectx"

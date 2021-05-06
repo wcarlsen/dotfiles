@@ -71,9 +71,14 @@ Set font size.
 Vim keybindings.
 
 #+begin_src emacs-lisp
-(use-package evil
-  :config
-  (evil-mode 1))
+  (use-package evil
+    :init
+    (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+    (setq evil-want-keybinding nil)
+    :config
+    (evil-set-leader nil (kbd "SPC"))
+    (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
+    (evil-mode 1))
 #+end_src
 
 ** Evil-commentary
@@ -83,6 +88,16 @@ Easy comment out stuff.
 (use-package evil-commentary
   :config
   (evil-commentary-mode))
+#+end_src
+
+** Evil-collection
+Collection of evil bindings.
+
+#+begin_src emacs-lisp
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
 #+end_src
 
 * Org
@@ -174,69 +189,42 @@ Snippet collection.
 (use-package yasnippet-snippets)
 #+end_src
 
-* Language server
-** Lsp-mode
-IDE like experience.
-
-#+begin_src emacs-lisp
-(use-package lsp-mode
-  :init (setq lsp-keymap-prefix "C-c l")
-  :hook (lsp-mode . lsp-enable-which-key-integration)
-  :commands (lsp lsp-deferred))
-#+end_src
-
-UI.
-
-#+begin_src emacs-lisp
-(use-package lsp-ui
-  :commands (lsp-ui-mode))
-#+end_src
-
 * Auto complete
 ** Company-mode
 Completion framework.
 
 #+begin_src emacs-lisp
-    ;; (use-package company
-    ;;   :config
-    ;;   (setq company-idle-delay 0.0)
-    ;;   (setq company-minimum-prefix-length 1)
-    ;;   (global-company-mode t))
   (use-package company
-    :after lsp-mode
-    :hook (lsp-mode . company)
-    :bind
-    (:map company-active-map ("<tab>" . company-complete-selection))
-    (:map lsp-mode-map ("<tab>" . company-indent-or-complete-common))
-    :custom
+    :config
     (setq company-idle-delay 0.0)
-    (setq company-minimum-prefix-length 1))
+    (setq company-minimum-prefix-length 1)
+    (global-company-mode t))
 #+end_src
 
 Add yasnippet to all company backends.
 
 #+begin_src emacs-lisp
-  ;; (defun mars/company-backend-with-yas (backends)
-  ;;       "Add :with company-yasnippet to company BACKENDS.
-  ;; Taken from https://github.com/syl20bnr/spacemacs/pull/179."
-  ;;       (if (and (listp backends) (memq 'company-yasnippet backends))
-  ;; 	  backends
-  ;; 	(append (if (consp backends)
-  ;; 		    backends
-  ;; 		  (list backends))
-  ;; 		'(:with company-yasnippet))))
+  (defun mars/company-backend-with-yas (backends)
+        "Add :with company-yasnippet to company BACKENDS.
+  Taken from https://github.com/syl20bnr/spacemacs/pull/179."
+        (if (and (listp backends) (memq 'company-yasnippet backends))
+            backends
+          (append (if (consp backends)
+                      backends
+                    (list backends))
+                  '(:with company-yasnippet))))
 
-  ;;     ;; add yasnippet to all backends
-  ;;     (setq company-backends
-  ;;           (mapcar #'mars/company-backend-with-yas company-backends))
+      ;; add yasnippet to all backends
+      (setq company-backends
+            (mapcar #'mars/company-backend-with-yas company-backends))
 #+end_src
 
 Documentation pop-up.
 
 #+begin_src emacs-lisp
-  ;; (use-package company-quickhelp
-  ;;   :config
-  ;;   (company-quickhelp-mode))
+  (use-package company-quickhelp
+    :config
+    (company-quickhelp-mode))
 #+end_src
 
 * Languages
@@ -245,17 +233,6 @@ Terraform hcl syntax goodies.
 
 #+begin_src emacs-lisp
 (use-package terraform-mode)
-#+end_src
-
-Lsp.
-
-#+begin_src emacs-lisp
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection '("/path/to/terraform-ls/terraform-ls" "serve"))
-                    :major-modes '(terraform-mode)
-                    :server-id 'terraform-ls))
-
-  (add-hook 'terraform-mode-hook #'lsp)
 #+end_src
 
 ** Yaml
@@ -271,6 +248,17 @@ Basic major mode for editing YAML.
     (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 #+end_src
 
+** Markdown
+ Configure markdown support.
+
+#+begin_src emacs-lisp
+(use-package markdown-mode
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+#+end_src
 * Syntax checking
 ** Flycheck
 Syntax checking.
@@ -295,14 +283,14 @@ Managing multiple terminals.
 File and project explorer.
 
 #+begin_src emacs-lisp
-(use-package treemacs
-  :bind
-  (:map global-map
-  ("C-x t t" . treemacs))
- :config
-  (setq treemacs-position 'right)
-  (treemacs-follow-mode t)
-  (treemacs-filewatch-mode t))
+  (use-package treemacs
+    :bind
+    (:map global-map
+    ("C-x t t" . treemacs))
+   :config
+    (set treemacs-position 'right)
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t))
 #+end_src
 
 Treemacs evil evil.
@@ -381,7 +369,7 @@ Displays keybindings hints.
 #+begin_src emacs-lisp
 (use-package which-key
   :config
-  (setq which-key-idle-delay 0.0)
+  (setq which-key-idle-delay 0.1)
   (which-key-mode))
 #+end_src
 
