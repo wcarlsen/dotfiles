@@ -30,12 +30,12 @@ return require('packer').startup(function()
 
   -- Autocomplete
   use 'hrsh7th/nvim-compe'
-  use 'sirver/ultisnips'
-  use 'honza/vim-snippets'
+  use "rafamadriz/friendly-snippets"
+  use "hrsh7th/vim-vsnip"
 
   -- Treesitter
-  -- use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  -- use 'nvim-treesitter/playground'
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use 'nvim-treesitter/playground'
 
   -- Misc
   use 'tpope/vim-sleuth'

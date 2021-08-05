@@ -18,14 +18,10 @@ require'compe'.setup {
     path = true;
     buffer = true;
     calc = true;
-    -- vsnip = true;
     nvim_lsp = true;
     nvim_lua = true;
-    spell = true;
-    tags = true;
-    snippets_nvim = true;
+    vsnip = true;
     ultisnips = true;
-    treesitter = true;
   };
 }
 
@@ -70,6 +66,3 @@ vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
--- vim.api.nvim_set_keymap("i", "<CR>", "v:lua.s_tab_complete()", {expr = true})
--- vim.api.nvim_set_keymap("i", vim.api.nvim_replace_termcodes("<CR>", true, true, true), [[compe#confirm('<CR>')]], {noremap = true, silent = true, expr = true})

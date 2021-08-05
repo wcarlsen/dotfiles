@@ -4,7 +4,6 @@
   "workbench.colorTheme": "SynthWave '84",
   "editor.wordWrap": "on",
   "workbench.sideBar.location": "right",
-  "window.zoomLevel": 1,
   "editor.renderWhitespace": "boundary",
   "files.trimTrailingWhitespace": true,
   "files.associations": {
@@ -40,12 +39,6 @@
   "go.useLanguageServer": true,
   "python.showStartPage": false,
   "terminal.integrated.fontFamily": "'Source Code Pro'",
-  "workbench.editorAssociations": [
-    {
-      "viewType": "jupyter.notebook.ipynb",
-      "filenamePattern": "*.ipynb"
-    }
-  ],
   "editor.fontFamily": "'Source Code Pro Regular','Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
   "terminal.integrated.fontSize": 10
 }

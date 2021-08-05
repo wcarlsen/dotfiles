@@ -175,7 +175,7 @@ alias kx="kubectx"
 alias kb="kubens"
 
 # Kubectl
-alias kdrainnode="kubectl drain $1 --ignore-daemonsets --delete-local-data --grace-period=30 --timeout=2m --force"
+alias kdrainnode="kubectl drain $1 --ignore-daemonsets --delete-emptydir-data --grace-period=30 --timeout=2m --force"
 
 # Fuck
 alias fu="fuck"
@@ -197,7 +197,7 @@ alias journal="journalctl"
 alias downloadmp3="youtube-dl -x --audio-format mp3 $1"
 
 # Pwgen
-alias pw="pwgen -cnys 10"
+alias pw="pwgen -cnys 12"
 
 # Du
 alias duh="du -h -d 0 [^.*]*"

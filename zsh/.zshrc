@@ -32,7 +32,10 @@ export do="--dry-run=client -o yaml"
 # Pipenv
 export PIPENV_VENV_IN_PROJECT=1
 
-# Pip
+# Poetry
+export POETRY_VIRTUALENVS_IN_PROJECT=1
+
+# Pip tooling
 export PATH=$PATH:$HOME/.local/bin
 
 # Go
