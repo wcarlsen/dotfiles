@@ -40,6 +40,11 @@
   "python.showStartPage": false,
   "terminal.integrated.fontFamily": "'Source Code Pro'",
   "editor.fontFamily": "'Source Code Pro Regular','Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-  "terminal.integrated.fontSize": 10
+  "terminal.integrated.fontSize": 10,
+  "yaml.customTags": [
+    "!encrypted/pkcs1-oaep scalar",
+    "!vault scalar"
+  ],
+  "redhat.telemetry.enabled": false
 }
 

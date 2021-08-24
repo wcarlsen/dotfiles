@@ -208,3 +208,9 @@ alias open="xdg-open"
 # Wireguard
 alias wgup="sudo wg-quick up wcarlsen"
 alias wgdown="sudo wg-quick down wcarlsen"
+
+# Minio
+alias mc="mcli"
+
+# Cryptocurrency
+alias xrp="curl dkk.rate.sx/xrp"
