@@ -1,8 +1,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="agnoster"
-DEFAULT_USER="$USER"
+# ZSH_THEME="agnoster"
+# DEFAULT_USER="$USER"
 
 # autoload -Uz vcs_info
 # precmd_vcs_info() { vcs_info }
@@ -12,15 +12,15 @@ DEFAULT_USER="$USER"
 # zstyle ':vcs_info:git:*' formats '%F{240}(%b)%r%f'
 # zstyle ':vcs_info:*' enable git
 
-# autoload -U promptinit && promptinit
-# prompt fade red
+autoload -U promptinit && promptinit
+prompt fade magenta
 
 plugins=(git autojump kubectl aws tmux thefuck terraform history zsh-autosuggestions fzf fzf-tab tmuxinator)
 
 source $ZSH/oh-my-zsh.sh
 
 # Editor
-export EDITOR=nvim
+export EDITOR="emacs -nw"
 
 # Aliases
 source $HOME/.aliasrc
