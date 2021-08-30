@@ -216,4 +216,4 @@ alias mc="mcli"
 alias xrp="curl https://dkk.rate.sx/xrp"
 
 # Weather
-alias weather="curl https://wttr.in"
+alias weather="curl https://wttr.in/copenhagen"

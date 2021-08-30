@@ -1,337 +1,144 @@
 #+TITLE: Emacs config
-#+AUTHOR: wcarlsen
+#+AUTHOR: wcarlsen (Willi Carlsen)
 #+PROPERTY: header-args:emacs-lisp :tangle ~/.emacs.d/init.el :results silent
 
 * Package manager
-** Straight
-Setup straight package manager.
+  Straight package manager for the Emacs hacker.
 
-#+begin_src emacs-lisp
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-#+end_src
+  Bootstraping.
+  #+begin_src emacs-lisp
+    (defvar bootstrap-version)
+    (let ((bootstrap-file
+	   (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+	  (bootstrap-version 5))
+      (unless (file-exists-p bootstrap-file)
+	(with-current-buffer
+	    (url-retrieve-synchronously
+	     "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+	     'silent 'inhibit-cookies)
+	  (goto-char (point-max))
+	  (eval-print-last-sexp)))
+      (load bootstrap-file nil 'nomessage))
+  #+end_src
 
-** Straight use-package
-Setup straught integration with use-package.
+  Prevent package.el loading packages prior to init-file loading
+  #+begin_src emacs-lisp
+	(setq package-enable-at-startup nil
+	      straight-use-package-by-default t)
+  #+end_src
 
-#+begin_src emacs-lisp
-(straight-use-package 'use-package)
-(setq straight-use-package-by-default t)
-#+end_src
+  Use use-package.
+  #+begin_src emacs-lisp
+    (straight-use-package 'use-package)
+  #+end_src
 
 * Basics
+  Basic configurations.
+  
 ** Better defaults
-Better defaults disables menu bars among other things.
+   Better defaults disables menu bars among other things.
 
-#+begin_src emacs-lisp
-(use-package better-defaults)
-#+end_src
+   #+begin_src emacs-lisp
+     (use-package better-defaults)
+   #+end_src
 
 ** Backup/swap files
-Disable stupid backup/swap files.
+   Disable stupid backup/swap files.
 
-#+begin_src emacs-lisp
-(setq make-backup-files nil)
-(setq auto-save-default nil)
-#+end_src
+    #+begin_src emacs-lisp
+        (setq make-backup-files nil
+              auto-save-default nil)
+    #+end_src   
 
 ** Line highlight
-Highlight current line.
+   Highlight current line.
 
-#+begin_src emacs-lisp
-(global-hl-line-mode t)
-#+end_src
+   #+begin_src emacs-lisp
+     (global-hl-line-mode t)
+   #+end_src
 
 ** Sounds
-Disable ring bell.
+   Disable ring bell.
 
-#+begin_src emacs-lisp
-(setq ring-bell-function 'ignore)
-#+end_src
+   #+begin_src emacs-lisp
+     (setq ring-bell-function 'ignore)
+   #+end_src
 
 ** Font size
-Set font size.
+   Set font size.
 
-#+begin_src emacs-lisp
-(set-face-attribute 'default nil :height 110)
-#+end_src
+   #+begin_src emacs-lisp
+     (set-face-attribute 'default nil :height 110)
+   #+end_src
 
-* Vim bindings
-** Evil
-Vim keybindings.
-
-#+begin_src emacs-lisp
-  (use-package evil
-    :init
-    (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
-    (setq evil-want-keybinding nil)
-    :config
-    (evil-set-leader nil (kbd "SPC"))
-    (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)
-    (evil-mode 1))
-#+end_src
-
-** Evil-commentary
-Easy comment out stuff.
-
-#+begin_src emacs-lisp
-(use-package evil-commentary
-  :config
-  (evil-commentary-mode))
-#+end_src
-
-** Evil-collection
-Collection of evil bindings.
-
-#+begin_src emacs-lisp
-(use-package evil-collection
-  :after evil
-  :config
-  (evil-collection-init))
-#+end_src
+** Word wrap
+   Enable word wrap
+   #+begin_src emacs-lisp
+     (global-visual-line-mode t)
+   #+end_src
 
 * Org
-** Pretty bullets
-Configure pretty bullets.
+  Org configurations.
 
-#+begin_src emacs-lisp
-(use-package org-bullets
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-#+end_src
+** Pretty bullets
+   Configure pretty bullets.
+
+   #+begin_src emacs-lisp
+     (use-package org-bullets
+       :config
+       (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+   #+end_src
 
 ** Template snippets
-Org templates and add source code block snippit.
+   Org templates and add source code block snippit.
 
-#+begin_src emacs-lisp 
-(require 'org-tempo)
-(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-(add-to-list 'org-structure-template-alist '("sh" . "src shell"))
-#+end_src
+   #+begin_src emacs-lisp 
+     (require 'org-tempo)
+     (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+     (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+   #+end_src
 
 ** Auto tangle
-Autotangle configuration files.
+   Autotangle configuration files.
 
-#+begin_src emacs-lisp
-(defun efs/org-babel-tangle-config ()
-  (when (string-equal (buffer-file-name)
-		      (expand-file-name "~/emacs.org"))
-    ;; Dynamic scoping to the rescue
-    (let ((org-confirm-babel-evaluate nil))
-      (org-babel-tangle))))
+   #+begin_src emacs-lisp
+     (defun efs/org-babel-tangle-config ()
+       (when (string-equal (buffer-file-name)
+                           (expand-file-name "~/emacs.org"))
+         ;; Dynamic scoping to the rescue
+         (let ((org-confirm-babel-evaluate nil))
+           (org-babel-tangle))))
 
-(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
-#+end_src
+     (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+   #+end_src
 
-* Git
-** Magit
-Git user interface.
+* Markdown
+  Configuring Markdown.
 
-#+begin_src emacs-lisp
-(use-package magit)
-#+end_src
+** Markdown-mode
+   Markdown major mode for editing.
 
-** Git-gutter
-Visual representation of changes to files in git.
-
-#+begin_src emacs-lisp
-  (use-package git-gutter
-    :config
-    (global-git-gutter-mode +1)
-    (custom-set-variables '(git-gutter:update-interval 2)))
-    ;; (custom-set-variables
-    ;; '(git-gutter:modified-sign "~")))
-    ;; '(git-gutter:added-sign "+")
-    ;; '(git-gutter:deleted-sign "-"))
-    ;; (set-face-background 'git-gutter:modified "yellow"))
-    ;; (set-face-foreground 'git-gutter:added "green")
-    ;; (set-face-foreground 'git-gutter:deleted "red"))
-#+end_src
-
-* Project management
-** Projectile
-Setup project interaction libary for accessing multiple projects.
-
-#+begin_src emacs-lisp
-(use-package projectile
-  :config
-  (projectile-mode +1)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (setq projectile-project-search-path 
-  '("~/" "~/spaghetti/private/" "~/spaghetti/dfds/"))
-  (projectile-discover-projects-in-search-path))
-#+end_src
-
-* Snippets
-** Yansnippet
-Snippet template system.
-
-#+begin_src emacs-lisp
-(use-package yasnippet
-  :config
-  (yas-global-mode 1))
-#+end_src
-
-** Yasnippet-snippets
-Snippet collection.
-
-#+begin_src emacs-lisp
-(use-package yasnippet-snippets)
-#+end_src
-
-* Auto complete
-** Company-mode
-Completion framework.
-
-#+begin_src emacs-lisp
-  (use-package company
-    :config
-    (setq company-idle-delay 0.0)
-    (setq company-minimum-prefix-length 1)
-    (global-company-mode t))
-#+end_src
-
-Add yasnippet to all company backends.
-
-#+begin_src emacs-lisp
-  (defun mars/company-backend-with-yas (backends)
-        "Add :with company-yasnippet to company BACKENDS.
-  Taken from https://github.com/syl20bnr/spacemacs/pull/179."
-        (if (and (listp backends) (memq 'company-yasnippet backends))
-            backends
-          (append (if (consp backends)
-                      backends
-                    (list backends))
-                  '(:with company-yasnippet))))
-
-      ;; add yasnippet to all backends
-      (setq company-backends
-            (mapcar #'mars/company-backend-with-yas company-backends))
-#+end_src
-
-Documentation pop-up.
-
-#+begin_src emacs-lisp
-  (use-package company-quickhelp
-    :config
-    (company-quickhelp-mode))
-#+end_src
-
-* Languages
-** Terraform
-Terraform hcl syntax goodies.
-
-#+begin_src emacs-lisp
-(use-package terraform-mode)
-#+end_src
-
-** Yaml
-Basic major mode for editing YAML.
-
-#+begin_src emacs-lisp
-(use-package yaml-mode
-  :config
-  (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-  (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
-  (add-hook 'yaml-mode-hook
-  '(lambda ()
-    (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
-#+end_src
-
-** Markdown
- Configure markdown support.
-
-#+begin_src emacs-lisp
-(use-package markdown-mode
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
+   #+begin_src emacs-lisp
+     (use-package markdown-mode
+       :commands (markdown-mode gfm-mode)
+       :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "multimarkdown"))
-#+end_src
-* Syntax checking
-** Flycheck
-Syntax checking.
-
-#+begin_src emacs-lisp
-(use-package flycheck
-  :init (global-flycheck-mode))
-#+end_src
-
-* Terminal
-** Multiterm
-Managing multiple terminals.
-
-#+begin_src emacs-lisp
-(use-package multi-term
-  :config
-  (setq multi-term-program "/bin/zsh"))
-#+end_src
-
-* File explorer
-** Treemacs
-File and project explorer.
-
-#+begin_src emacs-lisp
-  (use-package treemacs
-    :bind
-    (:map global-map
-    ("C-x t t" . treemacs))
-   :config
-    (set treemacs-position 'right)
-    (treemacs-follow-mode t)
-    (treemacs-filewatch-mode t))
-#+end_src
-
-Treemacs evil evil.
-
-#+begin_src emacs-lisp
-(use-package treemacs-evil
-  :after (treemacs evil))
-#+end_src
-
-Treemacs projectile plugin.
-
-#+begin_src emacs-lisp
-(use-package treemacs-projectile
-  :after (treemacs projectile))
-#+end_src
-
-Treemacs magit plugin.
-
-#+begin_src emacs-lisp
-(use-package treemacs-magit
-  :after (treemacs magit))
-#+end_src
-
-Treemacs icons.
-#+begin_src emacs-lisp
-(use-package treemacs-icons-dired
-  :after (treemacs dired)
-  :config (treemacs-icons-dired-mode))
-#+end_src
+       :init (setq markdown-command "multimarkdown"))
+   #+end_src
 
 * Themes
+  Color theme.
+
 ** Spacemacs theme
-Use the nice spacemacs theme.
+   Use the nice spacemacs theme.
 
-#+begin_src emacs-lisp
-(use-package spacemacs-theme
-  :defer t
-  :init (load-theme 'spacemacs-dark t))
-#+end_src
+   #+begin_src emacs-lisp
+     (use-package spacemacs-theme
+       :defer t
+       :init (load-theme 'spacemacs-dark t))
+   #+end_src
 
-* Mode line
 ** Spaceline
 Beautiful modeline.
 
@@ -343,33 +150,199 @@ Beautiful modeline.
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
   (spaceline-spacemacs-theme))
 #+end_src
- 
-* Misc
-** Exec path from shell
-Ensure environment varibles in emacs and shell is the same.
 
-#+begin_src emacs-lisp
-(use-package exec-path-from-shell)
-#+end_src
+* Vim
+  Configure vi like behaviour.
 
-** Anzu
-Display current search match and nice query replace.
+** Evil
+   Vi layer.
 
-#+begin_src emacs-lisp
-(use-package anzu
-  :config
-  (global-set-key [remap query-replace] 'anzu-query-replace)
-  (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
-  (global-anzu-mode +1))
-#+end_src
+   #+begin_src emacs-lisp
+     (use-package evil
+       :init
+       (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+       (setq evil-want-keybinding nil)
+       :config
+       (evil-mode 1)
+       (evil-ex-define-cmd "ls" 'ibuffer))
+   #+end_src
+   
+** Evil-collection
+   A Collection of Evil bindings.
 
-** Which key
-Displays keybindings hints.
+   #+begin_src emacs-lisp
+     (use-package evil-collection
+       :after evil
+       :config
+       (evil-collection-init))
+   #+end_src
+   
+** Evil-commentary
+   Easy commenting.
 
-#+begin_src emacs-lisp
-(use-package which-key
-  :config
-  (setq which-key-idle-delay 0.1)
-  (which-key-mode))
-#+end_src
+   #+begin_src emacs-lisp
+     (use-package evil-commentary
+       :config
+       (evil-commentary-mode))
+   #+end_src
+
+* File explorer
+  Setup a file explorer.
+
+** Neotree
+   Setup simple file explorer.
+
+   #+begin_src emacs-lisp
+     (use-package neotree
+       :config
+       (global-set-key [f8] 'neotree-toggle)
+       (setq projectile-switch-project-action 'neotree-projectile-action-hide
+             neo-window-position 'right
+             neo-theme (if (display-graphic-p) 'icons 'arrow)))
+
+     (defun neotree-projectile-action-hide()
+       (neotree-projectile-action)
+       (neotree-toggle))
+   #+end_src
+   
+** All-the-icons
+   Display icons for Neotree.
+
+   #+begin_src emacs-lisp
+     (use-package all-the-icons
+       :after neotree)
+   #+end_src
+  
+# ** Treemacs
+#    Configure Treemacs a NerdTree like file explorer.
+
+#    #+begin_src emacs-lisp
+#      (use-package treemacs
+#        :config
+#        (setq treemacs-position 'right)
+#        (treemacs-filewatch-mode t)
+#        (treemacs-follow-mode t))
+#    #+end_src
+
+# ** Treemacs-evil
+#    Setup evil for treemacs.
+
+#    #+begin_src emacs-lisp
+#      (use-package treemacs-evil
+#        :after (treemacs evil))
+#    #+end_src
+
+# ** Treemacs-projectile
+#    Treemacs projectile plugin.
+
+#    #+begin_src emacs-lisp
+#      (use-package treemacs-projectile
+#        :after (treemacs projectile))
+#    #+end_src
+
+# ** Treemacs-icons-dired
+#    Use Treemacs icons in dired.
+
+#    #+begin_src emacs-lisp
+#      (use-package treemacs-icons-dired
+#        :after (treemacs dired)
+#        :config
+#        (treemacs-icons-dired-mode))
+#    #+end_src
+
+* Project management
+  Project management.
+
+** Projectile
+   Project interaction libary.
+
+   #+begin_src emacs-lisp
+     (use-package projectile
+       :config
+       (projectile-mode +1)
+       (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+       (setq projectile-project-search-path '("~" "~/spaghetti/private/" "~/spaghetti/dfds/"))
+       (projectile-discover-projects-in-search-path))
+   #+end_src
+
+* Git
+  Git related configurations.
+
+** Magit
+   Interactions with git.
+
+   #+begin_src emacs-lisp
+     (use-package magit)
+   #+end_src
+
+** Git-gutter
+   Visual git indicators.
+
+   #+begin_src emacs-lisp
+     (use-package git-gutter
+       :config
+       (global-git-gutter-mode +1)
+       (custom-set-variables '(git-gutter:update-interval 2)))
+   #+end_src
+
+* Terminal
+  Configure terminal setup.
+
+** Multiterm
+   Managing multiple terminals.
+
+   #+begin_src emacs-lisp
+     (use-package multi-term
+       :config
+       (setq multi-term-program "/bin/zsh"))
+   #+end_src
+
+* Completion
+  Auto-complete.
+
+** Company
+   Completion framework.
+
+   #+begin_src emacs-lisp
+     (use-package company
+       :config
+       (setq company-idle-delay 0.0)
+       (setq company-minimum-prefix-length 1)
+       (global-company-mode t))
+   #+end_src
+
+** Dumb-jump
+   Near zero configuration definition jumping.
+
+   #+begin_src emacs-lisp
+     (use-package dumb-jump
+       :config
+       (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
+   #+end_src
+
+* Terraform
+  Configure Terraform.
+
+** Terraform-mode
+   Setup Terraform-mode.
+
+   #+begin_src emacs-lisp
+     (use-package terraform-mode)
+   #+end_src
+
+* Yaml
+  Configure yaml.
+
+** Yaml-mode
+   Major mode for yaml.
+
+   #+begin_src emacs-lisp
+     (use-package yaml-mode
+       :config
+       (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+       (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
+       (add-hook 'yaml-mode-hook
+       '(lambda ()
+         (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
+   #+end_src
 
