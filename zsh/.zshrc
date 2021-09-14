@@ -55,3 +55,6 @@ setopt HIST_FIND_NO_DUPS
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_BEEP
 export HISTORY_IGNORE="(cat|AWS|SECRET|KEY|base64|secret|export)"
+
+# Mcfly
+eval "$(mcfly init zsh)"
