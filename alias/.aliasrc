@@ -217,3 +217,11 @@ alias xrp="curl https://dkk.rate.sx/xrp"
 
 # Weather
 alias weather="curl https://wttr.in/copenhagen"
+
+# Minikube
+alias startk8s="minikube start --cpus 2 --memory 4096"
+alias startk8smulti="minikube start --cpus 2 --memory 2048 --nodes=2 --cni=flannel"
+alias startk8scustom="minikube start --cpus $1 --memory $2"
+
+# Tree
+alias treea="tree -a -I '.git|.node_modules|.venv|.terragrunt-cache'"

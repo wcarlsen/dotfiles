@@ -134,9 +134,17 @@
 
    #+begin_src emacs-lisp
      (setq org-agenda-files '("~/mylife.org"))
-
      (setq org-todo-keywords
-           '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")))
+           '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)" "CANCELED(c@)")))
+   #+end_src
+
+** Presentation
+   Org-tree-slide.
+
+   #+begin_src emacs-lisp
+     (use-package org-tree-slide
+       :custom
+       (org-image-actual-width nil))
    #+end_src
 
 * Markdown
@@ -226,6 +234,16 @@ Beautiful modeline.
 #        (evil-org-agenda-set-keys))
 #    #+end_src
 
+# * Window manager
+#   Setup Emacs as window manager.
+
+#   #+begin_src emacs-lisp
+#     (use-package exwm
+#       :config
+#       (setq exwm-workspace-number 5)
+#       (exwm-enable))
+#   #+end_src
+
 * File explorer
   Setup a file explorer.
 
@@ -302,7 +320,7 @@ Beautiful modeline.
        :config
        (evil-mode 1)
        (evil-ex-define-cmd "ls" 'ibuffer)
-       (evil-ex-define-cmd "term" 'vterm))
+       (evil-ex-define-cmd "term" 'multi-vterm))
    #+end_src
    
 ** Evil-collection
@@ -339,21 +357,11 @@ Beautiful modeline.
 * Terminal
   Configure terminal setup.
 
-# ** Multiterm
-#    Managing multiple terminals.
-
-#    #+begin_src emacs-lisp
-#      (use-package multi-term
-#        :config
-#        (setq multi-term-program "/bin/zsh"))
-#    #+end_src
-
-   
 ** Vterm
    Better terminal emulation.
 
    #+begin_src emacs-lisp
-     (use-package vterm)
+     (use-package multi-vterm)
    #+end_src
 
 * Dashboard
@@ -375,10 +383,26 @@ Beautiful modeline.
        (setq dashboard-center-content t)
        (setq dashboard-items '(
                              (recents  . 5)
-                             (projects . 5)
+                             (projects . 10)
                              ;; (agenda . 5)
                              )))
    #+end_src
+
+* RSS
+  Setup RSS.
+
+** Elfeed
+   Web feed reader.
+
+   #+begin_src emacs-lisp
+     (use-package elfeed
+       :config
+       (setq elfeed-feeds
+             '(("https://xkcd.com/rss.xml" comic)
+               ;; ("https://www.reddit.com/r/crawling/.rss" rc)
+               )))
+   #+end_src
+ 
 * Highlight search
   Highlight when searching.
 
@@ -491,6 +515,7 @@ Beautiful modeline.
        ;; (set-face-background 'indent-guide-face "dimgray")
        )
    #+end_src
+
 * Terraform
   Configure Terraform.
 
@@ -517,6 +542,39 @@ Beautiful modeline.
          (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
    #+end_src
 
+* Docker
+  Docker configuration.
+
+** Dockerfile-mode
+   Emacs Dockerfile mode.
+
+   #+begin_src emacs-lisp
+     (use-package dockerfile-mode)
+   #+end_src
+
+* Python
+  Python configuration.
+
+** Elpy
+   Setup beautiful elpy.
+
+   #+begin_src emacs-lisp
+     (use-package elpy
+       :init
+       (elpy-enable))
+   #+end_src
+
+* Emojis
+  Render emojis.
+
+** Emojify
+   Display emojis.
+
+   #+begin_src emacs-lisp
+     (use-package emojify
+       :hook (after-init . global-emojify-mode))
+   #+end_src
+
 * Fun 
   Just for fun.
   
@@ -526,3 +584,4 @@ Beautiful modeline.
    #+begin_src emacs-lisp
      (use-package fireplace)
    #+end_src
+

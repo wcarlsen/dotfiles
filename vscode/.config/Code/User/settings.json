@@ -72,6 +72,11 @@
     "!encrypted/pkcs1-oaep scalar",
     "!vault scalar"
   ],
-  "redhat.telemetry.enabled": false
+  "redhat.telemetry.enabled": false,
+  "go.toolsManagement.autoUpdate": true,
+  "python.linting.flake8Args": [
+    "--max-line-length=88"
+  ],
+  "window.zoomLevel": 1
 }
 
