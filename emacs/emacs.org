@@ -23,20 +23,70 @@
 
   Prevent package.el loading packages prior to init-file loading
   #+begin_src emacs-lisp
-	(setq package-enable-at-startup nil
-	      straight-use-package-by-default t)
+    (setq package-enable-at-startup nil)
   #+end_src
 
   Use use-package.
   #+begin_src emacs-lisp
     (straight-use-package 'use-package)
+    (setq straight-use-package-by-default t)
   #+end_src
+
+* Org
+** Auto tangle
+
+   Autotangle configuration files.
+
+   #+begin_src emacs-lisp
+     (defun efs/org-babel-tangle-config ()
+       (when (string-equal (buffer-file-name)
+                           (expand-file-name "~/.emacs.org"))
+         ;; Dynamic scoping to the rescue
+         (let ((org-confirm-babel-evaluate nil))
+           (org-babel-tangle))))
+
+     (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+   #+end_src
+
+** Pretty bullets
+   Configure pretty bullets.
+
+   #+begin_src emacs-lisp
+     (use-package org-bullets
+       :config
+       (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+   #+end_src
+
+** Agenda
+   Add files to agenda.
+
+   #+begin_src emacs-lisp
+     (setq org-agenda-files '("~/mylife.org"))
+     (setq org-todo-keywords
+           '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)" "CANCELED(c@)")))
+   #+end_src
+
+** Template snippets
+   Org templates and add source code block snippit.
+
+   #+begin_src emacs-lisp
+     (require 'org-tempo)
+     (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+     (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+   #+end_src
+
+* Better defaults
+  Better defaults, such as disable menu bars etc.
+
+   #+begin_src emacs-lisp
+     (use-package better-defaults)
+   #+end_src
 
 * Basics
   Basic configurations.
-  
+
 ** Better defaults
-   Better defaults disables menu bars among other things.
+   Better defaults, such as disable menu bars etc.
 
    #+begin_src emacs-lisp
      (use-package better-defaults)
@@ -48,7 +98,7 @@
     #+begin_src emacs-lisp
         (setq make-backup-files nil
               auto-save-default nil)
-    #+end_src   
+    #+end_src
 
 ** Line highlight
    Highlight current line.
@@ -87,79 +137,27 @@
        (mapc 'kill-buffer (delq (current-buffer) (buffer-list))))
    #+end_src
 
-   Make ibuffer default.
+** Reload init
+   Reload init.el file.
 
    #+begin_src emacs-lisp
-     (global-set-key (kbd "C-x C-b") 'ibuffer)
-     (autoload 'ibuffer "ibuffer" "List buffers." t)
+     (defun reload-init ()
+       "Reload init.el."
+       (interactive)
+       (load-file user-init-file))
    #+end_src
 
-* Org
-  Org configurations.
-
-** Pretty bullets
-   Configure pretty bullets.
+** Line numbers
+   Enable line numbers with a few exceptions.
 
    #+begin_src emacs-lisp
-     (use-package org-bullets
-       :config
-       (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-   #+end_src
+     (column-number-mode)
+     (global-display-line-numbers-mode t)
 
-** Template snippets
-   Org templates and add source code block snippit.
-
-   #+begin_src emacs-lisp 
-     (require 'org-tempo)
-     (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-     (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
-   #+end_src
-
-** Auto tangle
-   Autotangle configuration files.
-
-   #+begin_src emacs-lisp
-     (defun efs/org-babel-tangle-config ()
-       (when (string-equal (buffer-file-name)
-                           (expand-file-name "~/dotfiles/emacs/emacs.org"))
-         ;; Dynamic scoping to the rescue
-         (let ((org-confirm-babel-evaluate nil))
-           (org-babel-tangle))))
-
-     (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
-   #+end_src
-
-** Agenda
-   Add files to agenda.
-
-   #+begin_src emacs-lisp
-     (setq org-agenda-files '("~/mylife.org"))
-     (setq org-todo-keywords
-           '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)" "CANCELED(c@)")))
-   #+end_src
-
-** Presentation
-   Org-tree-slide.
-
-   #+begin_src emacs-lisp
-     (use-package org-tree-slide
-       :custom
-       (org-image-actual-width nil))
-   #+end_src
-
-* Markdown
-  Configuring Markdown.
-
-** Markdown-mode
-   Markdown major mode for editing.
-
-   #+begin_src emacs-lisp
-     (use-package markdown-mode
-       :commands (markdown-mode gfm-mode)
-       :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-       :init (setq markdown-command "multimarkdown"))
+     (dolist (mode '(org-mode-hook
+                     vterm-mode-hook
+                     treemacs-mode-hook))
+       (add-hook mode (lambda () (display-line-numbers-mode 0))))
    #+end_src
 
 * Themes
@@ -175,115 +173,14 @@
    #+end_src
 
 ** Spaceline
-Beautiful modeline.
-
-#+begin_src emacs-lisp
-(use-package spaceline
-  :config
-  (require 'spaceline-config)
-  (setq powerline-default-separator 'wave)
-  (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
-  (spaceline-spacemacs-theme))
-#+end_src
-
-# * Vim
-#   Configure vi like behaviour.
-
-# ** Evil
-#    Vi layer.
-
-#    #+begin_src emacs-lisp
-#      (use-package evil
-#        :init
-#        (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
-#        (setq evil-want-keybinding nil)
-#        :config
-#        (evil-mode 1)
-#        (evil-ex-define-cmd "ls" 'ibuffer)
-#        (evil-ex-define-cmd "term" 'multi-term))
-#    #+end_src
-   
-# ** Evil-collection
-#    A Collection of Evil bindings.
-
-#    #+begin_src emacs-lisp
-#      (use-package evil-collection
-#        :after evil
-#        :config
-#        (evil-collection-init))
-#    #+end_src
-   
-# ** Evil-commentary
-#    Easy commenting.
-
-#    #+begin_src emacs-lisp
-#      (use-package evil-commentary
-#        :config
-#        (evil-commentary-mode))
-#    #+end_src
-
-# ** Evil-org
-#    Evil configuration for org mode.
-
-#    #+begin_src emacs-lisp
-#      (use-package evil-org
-#        :after org evil
-#        :hook (org-mode . (lambda () evil-org-mode))
-#        :config
-#        (require 'evil-org-agenda)
-#        (evil-org-agenda-set-keys))
-#    #+end_src
-
-# * Window manager
-#   Setup Emacs as window manager.
-
-#   #+begin_src emacs-lisp
-#     (use-package exwm
-#       :config
-#       (setq exwm-workspace-number 5)
-#       (exwm-enable))
-#   #+end_src
-
-* File explorer
-  Setup a file explorer.
-
-** Neotree
-   Setup simple file explorer.
+   Beautiful modeline.
 
    #+begin_src emacs-lisp
-     (use-package neotree
+     (use-package spaceline
        :config
-       (global-set-key [f8] 'neotree-toggle)
-       (setq projectile-switch-project-action 'neotree-projectile-action-hide
-             neo-window-position 'right
-             neo-theme (if (display-graphic-p) 'icons 'arrow)))
-
-     (defun neotree-projectile-action-hide()
-       (neotree-projectile-action)
-       (neotree-toggle))
-   #+end_src
-   
-** All-the-icons
-   Display icons for Neotree.
-
-   #+begin_src emacs-lisp
-     (use-package all-the-icons
-       :after neotree)
-   #+end_src
-  
-* Project management
-  Project management.
-
-** Projectile
-   Project interaction libary.
-
-   #+begin_src emacs-lisp
-     (use-package projectile
-       :config
-       (projectile-mode +1)
-       (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-       (setq projectile-project-search-path '("~" "~/spaghetti/private/" "~/spaghetti/dfds/"))
-       (projectile-discover-projects-in-search-path))
+       (require 'spaceline-config)
+       (setq powerline-default-separator 'wave)
+              (spaceline-spacemacs-theme))
    #+end_src
 
 * Git
@@ -306,131 +203,43 @@ Beautiful modeline.
        (custom-set-variables '(git-gutter:update-interval 2)))
    #+end_src
 
-* Vim
-  Configure vi like behaviour.
+* Vterm
+  Better terminal emulation.
 
-** Evil
-   Vi layer.
+  #+begin_src emacs-lisp
+    (use-package multi-vterm
+      :bind ("C-x t" . multi-vterm-dedicated-toggle))
+  #+end_src
 
-   #+begin_src emacs-lisp
-     (use-package evil
-       :init
-       (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
-       (setq evil-want-keybinding nil)
-       :config
-       (evil-mode 1)
-       (evil-ex-define-cmd "ls" 'ibuffer)
-       (evil-ex-define-cmd "term" 'multi-vterm))
-   #+end_src
-   
-** Evil-collection
-   A Collection of Evil bindings.
+* Lsp, completion, lint, snippets
+  Language server protocol support.
 
-   #+begin_src emacs-lisp
-     (use-package evil-collection
-       :after evil
-       :config
-       (evil-collection-init))
-   #+end_src
-   
-** Evil-commentary
-   Better commenting.
-   
-   #+begin_src emacs-lisp
-     (use-package evil-commentary
-       :config
-       (evil-commentary-mode))
-   #+end_src
+** Lsp-mode
+   Minimal setup.
+  #+begin_src emacs-lisp
+    (use-package lsp-mode
+      :after (which-key)
+      :init
+      (setq lsp-keymap-prefix "C-c l")
+      :hook
+      ;; (prog-mode . lsp-deferred)
+      (go-mode . lsp-deferred)
+      (bash-mode . lsp-deferred)
+      (terraform-mode . lsp-deferred)
+      (lsp-mode . lsp-enable-which-key-integration)
+      :config
+      (setq lsp-auto-guess-root t)
+      (setq lsp-terraform-server 'terraform-ls)
+      (lsp-register-client
+         (make-lsp-client :new-connection (lsp-stdio-connection '("/usr/bin/terraform-ls" "serve"))
+                          :major-modes '(terraform-mode)
+                          :server-id 'terraform-ls))
+      :commands lsp)
 
-** Evil-org
-   Evil configuration for org mode.
+    (use-package helm-lsp :commands helm-lsp-workspace-symbol)
 
-   #+begin_src emacs-lisp
-     (use-package evil-org
-       :after org evil
-       :hook (org-mode . (lambda () evil-org-mode))
-       :config
-       (require 'evil-org-agenda)
-       (evil-org-agenda-set-keys))
-   #+end_src
-
-* Terminal
-  Configure terminal setup.
-
-** Vterm
-   Better terminal emulation.
-
-   #+begin_src emacs-lisp
-     (use-package multi-vterm)
-   #+end_src
-
-* Dashboard
-  Setup Emacs banner.
-
-** Dashboard
-   Configure dashboard package.
-
-   #+begin_src emacs-lisp
-     (use-package dashboard
-       :config
-       (dashboard-setup-startup-hook)
-       (setq dashboard-banner-logo-title "WCARLSEN")
-       (setq dashboard-startup-banner 'logo)
-       (setq dashboard-set-heading-icons t)
-       (setq dashboard-set-file-icons t)
-       (setq dashboard-week-agenda t)
-       (setq dashboard-filter-agenda-entry 'dashboard-no-filter-agenda)
-       (setq dashboard-center-content t)
-       (setq dashboard-items '(
-                             (recents  . 5)
-                             (projects . 10)
-                             ;; (agenda . 5)
-                             )))
-   #+end_src
-
-* RSS
-  Setup RSS.
-
-** Elfeed
-   Web feed reader.
-
-   #+begin_src emacs-lisp
-     (use-package elfeed
-       :config
-       (setq elfeed-feeds
-             '(("https://xkcd.com/rss.xml" comic)
-               ;; ("https://www.reddit.com/r/crawling/.rss" rc)
-               )))
-   #+end_src
- 
-* Highlight search
-  Highlight when searching.
-
-** Anzu
-   Display current search.
-   #+begin_src emacs-lisp
-     (use-package anzu
-       :config
-       (global-set-key [remap query-replace] 'anzu-query-replace)
-       (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
-       (global-anzu-mode +1))
-   #+end_src
-
-* Display keybindings
-  Help showing keybindings
-
-** Which-key
-   Minor mode to show keybindings in a buffer.
-   
-   #+begin_src emacs-lisp
-     (use-package which-key
-       :config
-       (which-key-mode)
-       (which-key-setup-minibuffer))
-   #+end_src
-   
-* Completion
-  Auto-complete.
+    (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+  #+end_src
 
 ** Company
    Completion framework.
@@ -452,35 +261,13 @@ Beautiful modeline.
        (company-quickhelp-mode))
    #+end_src
 
-** Dumb-jump
-   Near zero configuration definition jumping.
+** Company-box
+   Add icons to company-mode.
 
    #+begin_src emacs-lisp
-     (use-package dumb-jump
-       :config
-       (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
+     (use-package company-box
+       :hook (company-mode . company-box-mode))
    #+end_src
-
-* Snippets
-  You need snippets in your life man.
-  
-** Yasnippet
-   Templating system.
-
-   #+begin_src emacs-lisp
-     (use-package yasnippet
-       :config
-       (yas-global-mode 1))
-   #+end_src
-
-** Yasnippet-snippets
-   The actual snippets.
-   #+begin_src emacs-lisp
-     (use-package yasnippet-snippets)
-   #+end_src
-
-* Linting
-  Syntax checking.
 
 ** Flycheck
    Modern syntax checker.
@@ -490,9 +277,28 @@ Beautiful modeline.
        :init (global-flycheck-mode))
    #+end_src
 
-* Auto pair
+** Yasnippet
+   Templating and snippet system.
 
-** Smartparens
+   #+begin_src emacs-lisp
+     (use-package yasnippet
+       :config
+       (yas-global-mode 1))
+
+     (use-package yasnippet-snippets)
+   #+end_src
+
+* Which key
+  Minor mode to show keybindings in a buffer.
+
+  #+begin_src emacs-lisp
+    (use-package which-key
+      :config
+      (which-key-mode)
+      (which-key-setup-minibuffer))
+  #+end_src
+
+* Smartparens
    Dealing with pairs.
 
    #+begin_src emacs-lisp
@@ -501,11 +307,8 @@ Beautiful modeline.
        (require 'smartparens-config)
        (smartparens-global-mode))
    #+end_src
- 
-* Indet guides 
-  Setup visual indent guides.
 
-** Indent-guides
+* Indent-guides
    Show vertical lines to guide indentation.
 
    #+begin_src emacs-lisp
@@ -516,72 +319,141 @@ Beautiful modeline.
        )
    #+end_src
 
-* Terraform
-  Configure Terraform.
-
-** Terraform-mode
-   Setup Terraform-mode.
-
-   #+begin_src emacs-lisp
-     (use-package terraform-mode)
-   #+end_src
-
-* Yaml
-  Configure yaml.
-
-** Yaml-mode
-   Major mode for yaml.
-
-   #+begin_src emacs-lisp
-     (use-package yaml-mode
-       :config
-       (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-       (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
-       (add-hook 'yaml-mode-hook
-       '(lambda ()
-         (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
-   #+end_src
-
-* Docker
-  Docker configuration.
-
-** Dockerfile-mode
-   Emacs Dockerfile mode.
-
-   #+begin_src emacs-lisp
-     (use-package dockerfile-mode)
-   #+end_src
-
-* Python
-  Python configuration.
-
-** Elpy
-   Setup beautiful elpy.
-
-   #+begin_src emacs-lisp
-     (use-package elpy
-       :init
-       (elpy-enable))
-   #+end_src
-
-* Emojis
-  Render emojis.
-
-** Emojify
-   Display emojis.
+* Emojify
+  Display emojis.
 
    #+begin_src emacs-lisp
      (use-package emojify
        :hook (after-init . global-emojify-mode))
+
+     (use-package company-emoji
+       :config
+       (add-to-list 'company-backends 'company-emoji))
    #+end_src
 
-* Fun 
-  Just for fun.
-  
-** Fireplace
-   A fireplace.
+* Anzu
+  Display current search.
+
+  #+begin_src emacs-lisp
+    (use-package anzu
+      :config
+      (global-set-key [remap query-replace] 'anzu-query-replace)
+      (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
+      (global-anzu-mode +1))
+  #+end_src
+
+* Helm
+  Powerfull search tool.
+
+  #+begin_src emacs-lisp
+    (use-package helm
+      :config
+      (global-set-key (kbd "M-x") #'helm-M-x)
+      (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
+      (global-set-key (kbd "C-x C-f") #'helm-find-files)
+      (helm-mode 1))
+  #+end_src
+
+* Treemacs
+  File explorer.
+
+  #+begin_src emacs-lisp
+    (use-package treemacs
+      :config
+      (progn
+        (setq treemacs-position 'right))
+      (treemacs-follow-mode t))
+
+    (use-package treemacs-icons-dired
+      :hook (dired-mode . treemacs-icons-dired-enable-once))
+
+    (use-package treemacs-magit
+      :after (treemacs magit))
+
+    (use-package treemacs-projectile
+      :after (treemacs projectile))
+  #+end_src
+
+* Projectile
+  Project management.
 
    #+begin_src emacs-lisp
-     (use-package fireplace)
+     (use-package projectile
+       :config
+       (projectile-mode +1)
+       (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+       (setq projectile-project-search-path '("~" "~/spaghetti/private/" "~/spaghetti/dfds/"))
+       (projectile-discover-projects-in-search-path))
+
+     (use-package helm-projectile
+       :config
+       (helm-projectile-on))
    #+end_src
 
+* Kubernetes
+  Controll Kubernetes with limited permissions.
+
+  #+begin_src emacs-lisp
+    (use-package kubernetes
+      :commands (kubernetes-overview))
+  #+end_src
+
+* Elfeed
+  RSS feed reader.
+
+  #+begin_src emacs-lisp
+    (use-package elfeed
+      :config
+      (setq elfeed-feeds
+            '(("https://xkcd.com/rss.xml" comic))))
+  #+end_src
+
+* Golang
+  Setup for golang.
+
+  #+begin_src emacs-lisp
+    (use-package go-mode
+      :config
+      (add-hook 'go-mode-hook (lambda () (setq tab-width 4
+                                               indent-tabs-mode 1))))
+  #+end_src
+
+  Install deps.
+  #+begin_src shell
+    go install golang.org/x/tools/gopls@latest
+  #+end_src
+
+* Bash
+  Setup bash.
+
+* Terraform
+  Setup Terraform.
+
+  #+begin_src emacs-lisp
+    (use-package terraform-mode)
+  #+end_src
+
+  Install deps.
+  #+begin_src shell
+    yay -S terraform-ls
+  #+end_src
+
+* Python
+  Setup Python.
+
+  #+begin_src emacs-lisp
+    (use-package lsp-pyright
+      :ensure t
+      :hook (python-mode . (lambda ()
+                              (require 'lsp-pyright)
+                              (lsp-deferred))))
+  #+end_src
+
+* Exec path from shell
+  Ensure environment variables is the same as in shell.
+
+  #+begin_src emacs-lisp
+    (use-package exec-path-from-shell
+      :config
+      (exec-path-from-shell-initialize))
+  #+end_src
