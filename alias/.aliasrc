@@ -228,3 +228,6 @@ alias treea="tree -a -I '.git|.node_modules|.venv|.terragrunt-cache'"
 
 # History
 alias history="history -f"
+
+# Kafka
+alias kaf="/usr/bin/kaf"
