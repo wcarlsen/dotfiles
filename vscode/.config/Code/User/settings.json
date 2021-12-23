@@ -1,19 +1,15 @@
 {
-  "workbench.startupEditor": "newUntitledFile",
-  "synthwave84.disableGlow": false,
-  "workbench.colorTheme": "SynthWave '84",
-  "editor.wordWrap": "on",
-  "workbench.sideBar.location": "right",
+  "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+  "editor.fontSize": 16,
   "editor.renderWhitespace": "boundary",
+  "editor.wordWrap": "on",
   "files.trimTrailingWhitespace": true,
-  "files.associations": {
-    "*.hcl": "terraform"
-  },
-  "python.linting.mypyEnabled": true,
-  "python.formatting.provider": "black",
-  "python.linting.flake8Enabled": true,
-  "python.linting.pylintEnabled": false,
-  "editor.tabSize": 4,
+  "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font'",
+  "terminal.integrated.fontSize": 16,
+  "workbench.colorTheme": "One Dark Pro",
+  "workbench.startupEditor": "none",
+  "workbench.sideBar.location": "right",
+  "workbench.iconTheme": "material-icon-theme",
   "[javascript]": {
     "editor.tabSize": 2,
   },
@@ -26,60 +22,11 @@
   "[html]": {
     "editor.tabSize": 2
   },
-  "[python]": {
-    "editor.tabSize": 4
-  },
   "[terraform]": {
     "editor.tabSize": 2
   },
-  "[svelte]": {
-    "editor.tabSize": 2,
-  },
-  "go.formatTool": "gofmt",
-  "go.useLanguageServer": true,
-  "python.showStartPage": false,
-  "terminal.integrated.fontFamily": "'Source Code Pro'",
-  "editor.fontFamily": "'Source Code Pro Regular','Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-  "terminal.integrated.fontSize": 10,
-  "yaml.customTags": [
-    "!And",
-    "!And sequence",
-    "!If",
-    "!If sequence",
-    "!Not",
-    "!Not sequence",
-    "!Equals",
-    "!Equals sequence",
-    "!Or",
-    "!Or sequence",
-    "!FindInMap",
-    "!FindInMap sequence",
-    "!Base64",
-    "!Join",
-    "!Join sequence",
-    "!Cidr",
-    "!Ref",
-    "!Sub",
-    "!Sub sequence",
-    "!GetAtt",
-    "!GetAZs",
-    "!ImportValue",
-    "!ImportValue sequence",
-    "!Select",
-    "!Select sequence",
-    "!Split",
-    "!Split sequence",
-    "!encrypted/pkcs1-oaep scalar",
-    "!vault scalar"
-  ],
-  "redhat.telemetry.enabled": false,
-  "go.toolsManagement.autoUpdate": true,
-  "python.linting.flake8Args": [
-    "--max-line-length=88"
-  ],
-  "window.zoomLevel": 1,
   "projectManager.git.baseFolders": [
-    "~/spaghetti"
+    "~/spaghetti",
+    "~/dotfiles"
   ]
 }
-
