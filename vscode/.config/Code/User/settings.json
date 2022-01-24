@@ -28,5 +28,7 @@
   "projectManager.git.baseFolders": [
     "~/spaghetti",
     "~/dotfiles"
-  ]
+  ],
+  "security.workspace.trust.untrustedFiles": "open",
+  "window.zoomLevel": 1
 }

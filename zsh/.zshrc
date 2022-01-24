@@ -1,18 +1,18 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# ZSH_THEME="agnoster"
-# DEFAULT_USER="$USER"
+ZSH_THEME="agnoster"
+DEFAULT_USER="$USER"
 
-autoload -U promptinit && promptinit
-prompt fade magenta
+#autoload -U promptinit && promptinit
+#prompt fade magenta
 
 plugins=(git autojump kubectl aws tmux thefuck terraform history zsh-autosuggestions fzf fzf-tab tmuxinator direnv)
 
 source $ZSH/oh-my-zsh.sh
 
 # Editor
-export EDITOR="code"
+export EDITOR="nvim"
 
 # Aliases
 source $HOME/.aliasrc

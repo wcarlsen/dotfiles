@@ -231,3 +231,6 @@ alias history="history -f"
 
 # Kafka
 alias kaf="/usr/bin/kaf"
+
+# dd
+alias ddusb="sudo dd if=$1 of=$2 bs=4M status=progress && sync" # $1=iso $2=/dev/disk
