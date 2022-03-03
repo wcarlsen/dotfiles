@@ -234,3 +234,8 @@ alias kaf="/usr/bin/kaf"
 
 # dd
 alias ddusb="sudo dd if=$1 of=$2 bs=4M status=progress && sync" # $1=iso $2=/dev/disk
+
+# Github
+alias ghprcreate="gh pr create --fill --reviewer $1"
+alias ghprmerge="gh pr merge --squash --delete-branch $1"
+alias ghprview="gh pr view --web $1"

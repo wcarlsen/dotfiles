@@ -7,19 +7,19 @@ DEFAULT_USER="$USER"
 #autoload -U promptinit && promptinit
 #prompt fade magenta
 
-plugins=(git autojump kubectl aws tmux thefuck terraform history zsh-autosuggestions fzf fzf-tab tmuxinator direnv)
+plugins=(git autojump kubectl aws tmux thefuck terraform history zsh-autosuggestions fzf fzf-tab tmuxinator direnv copypath)
 
 source $ZSH/oh-my-zsh.sh
 
 # Editor
-export EDITOR="emacsclient -n -a emacs"
+export EDITOR="nvim"
 
 # Aliases
 source $HOME/.aliasrc
 
 # Kubernetes contexts
 export KUBECONFIG=$(ls $HOME/.kube/config* | tr '\n' ':')
-export do="--dry-run=client -o yaml"
+# export do="--dry-run=client -o yaml"
 
 # Pipenv
 export PIPENV_VENV_IN_PROJECT=1
