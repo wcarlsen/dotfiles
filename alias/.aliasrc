@@ -213,7 +213,7 @@ alias wgdown="sudo wg-quick down wcarlsen"
 alias mc="mcli"
 
 # Cryptocurrency
-alias xrp="curl https://dkk.rate.sx/xrp"
+alias xrp="curl https://dkk.rate.sx/499xrp"
 
 # Weather
 alias weather="curl https://wttr.in/copenhagen"
