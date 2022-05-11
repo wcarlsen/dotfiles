@@ -31,6 +31,7 @@ pacs() {
 
 # Yay
 alias nay="DOWNGRADE_FROM_ALA=1 downgrade $1"
+alias yaycache="yay -Scc"
 
 yays() {
 	yay $(yay -Slq | fzf -m --preview="yay -Si {}" --preview-window=:hidden --bind=space:toggle-preview)

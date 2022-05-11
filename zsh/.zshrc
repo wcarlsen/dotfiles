@@ -7,7 +7,7 @@ DEFAULT_USER="$USER"
 #autoload -U promptinit && promptinit
 #prompt fade magenta
 
-plugins=(git autojump kubectl aws tmux thefuck terraform history zsh-autosuggestions fzf fzf-tab tmuxinator direnv copypath)
+plugins=(git autojump kubectl aws tmux thefuck terraform history zsh-autosuggestions fzf fzf-tab tmuxinator direnv copypath zoxide)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -51,3 +51,6 @@ export HISTORY_IGNORE="(cat|AWS|SECRET|KEY|base64|secret|export)"
 
 # Mcfly
 eval "$(mcfly init zsh)"
+
+# Starship
+#eval "$(starship init zsh)"
