@@ -7,7 +7,7 @@ DEFAULT_USER="$USER"
 #autoload -U promptinit && promptinit
 #prompt fade magenta
 
-plugins=(git autojump kubectl aws tmux thefuck terraform history zsh-autosuggestions fzf fzf-tab tmuxinator direnv copypath zoxide)
+plugins=(git autojump kubectl aws tmux thefuck terraform history zsh-autosuggestions fzf fzf-tab tmuxinator direnv copypath zoxide z aliases)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -33,6 +33,9 @@ export PATH=$PATH:$HOME/.local/bin
 # Go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+# Terraform
+export PATH=$PATH:/home/wcarlsen/bin
 
 # Dotnet
 export PATH=$PATH:$HOME/.dotnet/tools
