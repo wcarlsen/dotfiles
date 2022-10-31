@@ -48,6 +48,23 @@ return require('packer').startup(function(use)
   -- Gitsigns
   use { 'lewis6991/gitsigns.nvim' }
 
+  -- Sleuth
+  use { 'tpope/vim-sleuth' }
+
+  -- Indent-guides
+  use { 'lukas-reineke/indent-blankline.nvim' }
+
+  -- Completion
+  use { 'neovim/nvim-lspconfig' }
+  use { 'hrsh7th/cmp-nvim-lsp' }
+  use { 'hrsh7th/cmp-buffer' }
+  use { 'hrsh7th/cmp-path' }
+  use { 'hrsh7th/cmp-cmdline' }
+  use { 'hrsh7th/nvim-cmp' }
+  use { 'hrsh7th/cmp-vsnip' }
+  use { 'hrsh7th/vim-vsnip' }
+  use { 'ervandew/supertab' }
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
