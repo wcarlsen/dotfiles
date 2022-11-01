@@ -65,6 +65,9 @@ return require('packer').startup(function(use)
   use { 'hrsh7th/vim-vsnip' }
   use { 'ervandew/supertab' }
 
+  -- Tabs
+  use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'kyazdani42/nvim-web-devicons'}
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
