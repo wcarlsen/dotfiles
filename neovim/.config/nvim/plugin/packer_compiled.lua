@@ -79,30 +79,10 @@ _G.packer_plugins = {
     path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
     url = "https://github.com/akinsho/bufferline.nvim"
   },
-  ["cmp-buffer"] = {
+  ["coc.nvim"] = {
     loaded = true,
-    path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/cmp-buffer",
-    url = "https://github.com/hrsh7th/cmp-buffer"
-  },
-  ["cmp-cmdline"] = {
-    loaded = true,
-    path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/cmp-cmdline",
-    url = "https://github.com/hrsh7th/cmp-cmdline"
-  },
-  ["cmp-nvim-lsp"] = {
-    loaded = true,
-    path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
-    url = "https://github.com/hrsh7th/cmp-nvim-lsp"
-  },
-  ["cmp-path"] = {
-    loaded = true,
-    path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/cmp-path",
-    url = "https://github.com/hrsh7th/cmp-path"
-  },
-  ["cmp-vsnip"] = {
-    loaded = true,
-    path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/cmp-vsnip",
-    url = "https://github.com/hrsh7th/cmp-vsnip"
+    path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/coc.nvim",
+    url = "https://github.com/neoclide/coc.nvim"
   },
   ["gitsigns.nvim"] = {
     loaded = true,
@@ -118,16 +98,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
-  },
-  ["nvim-cmp"] = {
-    loaded = true,
-    path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/nvim-cmp",
-    url = "https://github.com/hrsh7th/nvim-cmp"
-  },
-  ["nvim-lspconfig"] = {
-    loaded = true,
-    path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
-    url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
@@ -159,11 +129,6 @@ _G.packer_plugins = {
     path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  supertab = {
-    loaded = true,
-    path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/supertab",
-    url = "https://github.com/ervandew/supertab"
-  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -183,11 +148,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/vim-sleuth",
     url = "https://github.com/tpope/vim-sleuth"
-  },
-  ["vim-vsnip"] = {
-    loaded = true,
-    path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/vim-vsnip",
-    url = "https://github.com/hrsh7th/vim-vsnip"
   }
 }
 
