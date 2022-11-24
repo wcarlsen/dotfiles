@@ -60,6 +60,15 @@ return require('packer').startup(function(use)
   -- Tabs
   use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'kyazdani42/nvim-web-devicons'}
 
+  -- Tab completion
+  use { 'ervandew/supertab' }
+
+  -- Surround
+  use { 'tpope/vim-surround' }
+
+  -- Multiple-cursor
+  use { 'mg979/vim-visual-multi', branch = 'master' }
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then

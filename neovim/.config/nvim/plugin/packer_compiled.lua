@@ -129,6 +129,11 @@ _G.packer_plugins = {
     path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  supertab = {
+    loaded = true,
+    path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/supertab",
+    url = "https://github.com/ervandew/supertab"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -148,6 +153,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/vim-sleuth",
     url = "https://github.com/tpope/vim-sleuth"
+  },
+  ["vim-surround"] = {
+    loaded = true,
+    path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/vim-surround",
+    url = "https://github.com/tpope/vim-surround"
+  },
+  ["vim-visual-multi"] = {
+    loaded = true,
+    path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/vim-visual-multi",
+    url = "https://github.com/mg979/vim-visual-multi"
   }
 }
 
