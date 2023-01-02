@@ -84,6 +84,11 @@ _G.packer_plugins = {
     path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/coc.nvim",
     url = "https://github.com/neoclide/coc.nvim"
   },
+  ["editorconfig-vim"] = {
+    loaded = true,
+    path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/editorconfig-vim",
+    url = "https://github.com/editorconfig/editorconfig-vim"
+  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/home/wcarlsen/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",

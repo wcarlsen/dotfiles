@@ -69,6 +69,9 @@ return require('packer').startup(function(use)
   -- Multiple-cursor
   use { 'mg979/vim-visual-multi', branch = 'master' }
 
+  -- Editorconfig
+  use { 'editorconfig/editorconfig-vim' }
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then

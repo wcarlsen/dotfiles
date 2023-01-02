@@ -18,9 +18,6 @@ source $HOME/.aliasrc
 export KUBECONFIG=$(ls $HOME/.kube/config* | tr '\n' ':')
 # export do="--dry-run=client -o yaml"
 
-# Pipenv
-export PIPENV_VENV_IN_PROJECT=1
-
 # Poetry
 export POETRY_VIRTUALENVS_IN_PROJECT=1
 
@@ -51,6 +48,3 @@ export HISTORY_IGNORE="(cat|AWS|SECRET|KEY|base64|secret|export)"
 
 # Mcfly
 eval "$(mcfly init zsh)"
-
-# Starship
-# eval "$(starship init zsh)"
