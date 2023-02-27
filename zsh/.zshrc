@@ -4,7 +4,25 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="agnoster"
 DEFAULT_USER="$USER"
 
-plugins=(git autojump kubectl aws tmux thefuck terraform history zsh-autosuggestions fzf fzf-tab tmuxinator direnv copypath zoxide z aliases)
+plugins=(
+  git
+  autojump
+  kubectl
+  aws
+  tmux
+  thefuck
+  terraform
+  history
+  zsh-autosuggestions
+  fzf
+  fzf-tab
+  tmuxinator
+  direnv
+  copypath
+  zoxide
+  z
+  aliases
+)
 
 source $ZSH/oh-my-zsh.sh
 

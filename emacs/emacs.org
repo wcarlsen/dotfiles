@@ -1,0 +1,381 @@
+#+TITLE: Emacs config
+#+AUTHOR: wcarlsen
+#+PROPERTY: header-args:emacs-lisp :tangle ~/.emacs.d/init.el :results silent
+#+auto_tangle: t
+
+* Package manager
+
+** Straight
+Bootstrap straight package manager.
+#+begin_src emacs-lisp
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+	 (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+	(bootstrap-version 6))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+	  (url-retrieve-synchronously
+	   "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+	   'silent 'inhibit-cookies)
+	(goto-char (point-max))
+	(eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
+#+end_src
+
+Users of Emacs versions >= 27 will want to add this to their early init-file to prevent package.el loading packages prior to their init-file loading.
+#+begin_src emacs-lisp
+  (setq package-enable-at-startup nil)
+#+end_src
+
+To use use-package.
+#+begin_src emacs-lisp
+  (straight-use-package 'use-package)
+  (setq straight-use-package-by-default t)
+#+end_src
+
+* Org
+
+** Org-auto-tangle
+Automatically tangle org files on save.
+#+begin_src emacs-lisp
+  (use-package org-auto-tangle
+    :defer t
+    :hook (org-mode . org-auto-tangle-mode))
+#+end_src
+
+** Org-bullets
+Prettier org bullets.
+#+begin_src emacs-lisp
+  (use-package org-bullets
+    :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+#+end_src
+
+* Themes
+
+** Spacemacs-theme
+Use spacemacs theme.
+#+begin_src emacs-lisp
+  (use-package spacemacs-theme
+    :defer t
+    :init (load-theme 'spacemacs-dark t))
+#+end_src
+
+** Spaceline
+Use spacemacs status line.
+#+begin_src emacs-lisp
+  (use-package spaceline
+    :config
+    (require 'spaceline-config)
+    (setq powerline-default-separator 'wave)
+    (spaceline-spacemacs-theme))
+#+end_src
+
+* Misc
+
+** Font
+Set font and it's size.
+#+begin_src emacs-lisp
+  (set-face-attribute 'default nil :height 160)
+  (set-frame-font "FantasqueSansMono Nerd Font" nil t)
+#+end_src
+
+** Backup and swap files
+Disable stupid backup and swap files.
+#+begin_src emacs-lisp
+  (setq make-backup-files nil
+	auto-save-default nil)
+#+end_src
+
+** Sounds
+Disable ring bell (also visual indicator).
+#+begin_src emacs-lisp
+  (setq ring-bell-function 'ignore)
+#+end_src
+
+** Word wrap
+Enable word wrap
+#+begin_src emacs-lisp
+  (global-visual-line-mode t)
+#+end_src
+
+** Smartparens
+Auto pair parens.
+#+begin_src emacs-lisp
+  (use-package smartparens
+    :config
+    (require 'smartparens-config)
+    (smartparens-global-mode))
+#+end_src
+
+** Rainbow-delimiters
+Color parens.
+#+begin_src emacs-lisp
+  (use-package rainbow-delimiters
+    :config
+    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+#+end_src
+
+** Indent-guide
+Show indentation guides.
+#+begin_src emacs-lisp
+  (use-package indent-guide
+    :config
+    (add-hook 'prog-mode-hook #'indent-guide-mode))
+#+end_src
+
+** Exec-path-from-shell
+Ensure Emacs same path from shell.
+#+begin_src emacs-lisp
+  (use-package exec-path-from-shell
+    :config
+    (exec-path-from-shell-initialize))
+#+end_src
+
+** Beacon
+Never lose your cursor.
+#+begin_src emacs-lisp
+  (use-package beacon
+    :config
+    (beacon-mode 1))
+#+end_src
+
+** Follow symlink
+Follow symlink behaviour.
+#+begin_src emacs-lisp
+  (setq vc-follow-symlinks nil)
+#+end_src
+
+** Line highlight
+Highlight current line.
+#+begin_src emacs-lisp
+  (global-hl-line-mode t)
+  ;; (dolist (mode '(vterm-mode-hook))
+  ;;   (add-hook mode (lambda () (global-hl-line-mode nil))))
+#+end_src
+
+** Which-key
+Show keybindings.
+#+begin_src emacs-lisp
+  (use-package which-key
+    :config
+    (which-key-mode))
+#+end_src
+
+** Multiple-cursors
+Multiple cursors.
+#+begin_src emacs-lisp
+  (use-package multiple-cursors)
+#+end_src
+
+** Perspective
+Window manager like feature.
+#+begin_src emacs-lisp
+  (use-package perspective
+    :bind
+    ("C-x C-b" . persp-list-buffers)         ; or use a nicer switcher, see below
+    :custom
+    (persp-mode-prefix-key (kbd "C-c M-p"))  ; pick your own prefix key here
+    :init
+    (persp-mode))
+#+end_src
+
+* Git
+
+** Magit
+Interacts with git.
+#+begin_src emacs-lisp
+  (use-package magit)
+#+end_src
+
+** Magithub
+Interface for GitHub.
+#+begin_src emacs-lisp
+  (use-package magithub
+    :after magit
+    :config
+    (magithub-feature-autoinject t)
+    (setq magithub-clone-default-directory "~/spaghetti"))
+#+end_src
+
+** Diff-hl
+Highlight uncommitted changes.
+#+begin_src emacs-lisp
+  (use-package diff-hl
+    :config
+    (global-diff-hl-mode))
+#+end_src
+
+* Terminal
+
+** Vterm
+Fully fledge terminal emulator.
+#+begin_src emacs-lisp
+  (use-package vterm)
+#+end_src
+
+** Vterm-toggle
+Toggle vterm.
+#+begin_src emacs-lisp
+  (use-package vterm-toggle)
+#+end_src
+
+* Project management
+
+** Projectile
+Navigate and switch projects.
+#+begin_src emacs-lisp
+  (use-package projectile
+    :config
+    (projectile-mode +1)
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+    (setq projectile-project-search-path '("~" "~/spaghetti/"))
+    (projectile-discover-projects-in-search-path))
+#+end_src
+
+* Terraform
+
+** Terraform-mode
+Major mode for Terraform.
+#+begin_src emacs-lisp
+  (use-package terraform-mode
+    :hook
+    (terraform-mode . lsp-deferred))
+#+end_src
+
+* Yaml
+
+** Yaml-mode
+Major mode for yaml.
+#+begin_src emacs-lisp
+  (use-package yaml-mode
+    :hook
+    (yaml-mode . lsp-deferred)
+    :config
+    (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+    (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
+    (add-hook 'yaml-mode-hook
+    '(lambda ()
+       (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
+#+end_src
+
+* Golang
+
+** Go-mode
+Major mode for Golang.
+#+begin_src emacs-lisp
+  (use-package go-mode
+    :hook
+    (go-mode . lsp-deferred)
+    (go-mode . lsp-go-install-save-hooks)
+    :config
+    (add-hook 'go-mode-hook (lambda () (setq tab-width 4
+					     indent-tabs-mode 1))))
+
+  (defun lsp-go-install-save-hooks ()
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t))
+#+end_src
+
+* Docker
+
+** Dockerfile
+Major mode for Dockerfile.
+#+begin_src emacs-lisp
+  (use-package dockerfile-mode
+    :config
+    (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
+#+end_src
+
+* Elisp
+#+begin_src emacs-lisp
+  (add-hook 'emacs-lisp-mode-hook '(lambda ()
+				    (setq-local company-backends '(company-elisp company-dabbrev))
+				    (company-mode)))
+#+end_src
+
+* LSP
+
+** Lsp-mode
+Language server support.
+#+begin_src emacs-lisp
+  (use-package lsp-mode
+    :init (setq lsp-keymap-prefix "C-c l")
+    :hook
+    (lsp-mode . lsp-enable-which-key-integration)
+    :commands (lsp lsp-deferred)
+    :config
+    (setq lsp-auto-guess-root t)
+    (setq lsp-file-watch-threshold nil))
+#+end_src
+
+* Auto compelete
+
+** Company
+Completion framework.
+#+begin_src emacs-lisp
+  (use-package company
+    :config
+    ;; (company-tng-configure-default)
+    (setq company-idle-delay 0.0)
+    (setq company-minimum-prefix-length 1))
+#+end_src
+
+* Lint
+
+** Flycheck
+Modern linting.
+#+begin_src emacs-lisp
+  (use-package flycheck
+    :init (global-flycheck-mode))
+#+end_src
+
+* Minibuffer
+
+** Vertico
+Better completion.
+#+begin_src emacs-lisp
+  (use-package vertico
+    :init
+    (vertico-mode)
+    :config
+    (setq vertico-cycle t))
+#+end_src
+
+** Marginalia
+#+begin_src emacs-lisp
+  (use-package marginalia
+    :after vertico
+    :init
+    (marginalia-mode))
+#+end_src
+
+** Orderless
+Fuzzy search.
+#+begin_src emacs-lisp
+  (use-package orderless
+    :init
+    (setq completion-styles '(orderless)
+	  completion-category-defaults nil
+	  completion-category-overrides '((file (styles partial-completion)))))
+#+end_src
+
+** Savehist
+Preserve history.
+#+begin_src emacs-lisp
+  (use-package savehist
+    :init
+    (savehist-mode))
+#+end_src
+
+* File explorer
+
+** Treemacs
+Complex file explorer.
+#+begin_src emacs-lisp
+  (use-package treemacs
+    :config
+    (setq treemacs-position 'right)
+    (setq treemacs-project-follow-mode t))
+
+  (use-package treemacs-projectile)
+#+end_src
