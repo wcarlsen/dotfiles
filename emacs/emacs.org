@@ -55,19 +55,39 @@ Prettier org bullets.
 ** Spacemacs-theme
 Use spacemacs theme.
 #+begin_src emacs-lisp
-  (use-package spacemacs-theme
-    :defer t
-    :init (load-theme 'spacemacs-dark t))
+  ;; (use-package spacemacs-theme
+  ;;   :defer t
+  ;;   :init (load-theme 'spacemacs-dark t))
 #+end_src
 
 ** Spaceline
 Use spacemacs status line.
 #+begin_src emacs-lisp
-  (use-package spaceline
+  ;; (use-package spaceline
+  ;;   :config
+  ;;   (require 'spaceline-config)
+  ;;   (setq powerline-default-separator 'wave)
+  ;;   (spaceline-spacemacs-theme))
+#+end_src
+
+** Doom-themes
+Doom themes.
+#+begin_src emacs-lisp
+  (use-package doom-themes
     :config
-    (require 'spaceline-config)
-    (setq powerline-default-separator 'wave)
-    (spaceline-spacemacs-theme))
+    (setq doom-themes-enable-bold t
+	  doom-themes-enable-italic t
+	  doom-themes-treemacs-theme "doom-atom")
+    (load-theme 'doom-one t))
+#+end_src
+
+** Doom-modeline
+Doom modeline.
+#+begin_src emacs-lisp
+  (use-package doom-modeline
+    :init (doom-modeline-mode 1))
+
+  (use-package all-the-icons)
 #+end_src
 
 * Misc
@@ -149,8 +169,8 @@ Follow symlink behaviour.
 Highlight current line.
 #+begin_src emacs-lisp
   (global-hl-line-mode t)
-  ;; (dolist (mode '(vterm-mode-hook))
-  ;;   (add-hook mode (lambda () (global-hl-line-mode nil))))
+  (dolist (mode '(vterm-mode-hook))
+    (add-hook mode (lambda () (global-hl-line-mode nil))))
 #+end_src
 
 ** Which-key
@@ -165,18 +185,6 @@ Show keybindings.
 Multiple cursors.
 #+begin_src emacs-lisp
   (use-package multiple-cursors)
-#+end_src
-
-** Perspective
-Window manager like feature.
-#+begin_src emacs-lisp
-  (use-package perspective
-    :bind
-    ("C-x C-b" . persp-list-buffers)         ; or use a nicer switcher, see below
-    :custom
-    (persp-mode-prefix-key (kbd "C-c M-p"))  ; pick your own prefix key here
-    :init
-    (persp-mode))
 #+end_src
 
 * Git
@@ -293,6 +301,15 @@ Major mode for Dockerfile.
 				    (company-mode)))
 #+end_src
 
+* Nix
+
+** Nix-mode
+Nix major mode.
+#+begin_src emacs-lisp
+  (use-package nix-mode
+    :mode "\\.nix\\'")
+#+end_src
+
 * LSP
 
 ** Lsp-mode
@@ -318,6 +335,22 @@ Completion framework.
     ;; (company-tng-configure-default)
     (setq company-idle-delay 0.0)
     (setq company-minimum-prefix-length 1))
+#+end_src
+
+* Snippets
+
+** Yasnippet
+Snippet templating system.
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :config
+    (yas-global-mode 1))
+#+end_src
+
+** Yasnippet-snippets
+Actual snippets library.
+#+begin_src emacs-lisp
+  (use-package yasnippet-snippets)
 #+end_src
 
 * Lint
@@ -376,6 +409,46 @@ Complex file explorer.
     :config
     (setq treemacs-position 'right)
     (setq treemacs-project-follow-mode t))
+#+end_src
 
+** Treemacs-projectile
+Make projects discovery possible in treemacs.
+#+begin_src emacs-lisp
   (use-package treemacs-projectile)
+#+end_src
+
+* Vim
+
+** Evil
+Vim-like keybindings for Emacs.
+#+begin_src emacs-lisp
+  (use-package evil
+    :init
+    (setq evil-want-keybinding nil)
+    (setq evil-undo-system 'undo-redo)
+    :config
+    (evil-ex-define-cmd "ls" 'ibuffer)
+    (evil-ex-define-cmd "e" 'find-file)
+    (evil-ex-define-cmd "term" 'vterm)
+    (evil-mode 1))
+
+  (use-package goto-chg)
+#+end_src
+
+** Evil-collection
+Collection of evil bindings for different common modes.
+#+begin_src emacs-lisp
+  (use-package evil-collection
+    :after evil
+    :config
+    (evil-collection-init))
+#+end_src
+
+** Evil-commentary
+Easy commenting stuff.
+#+begin_src emacs-lisp
+  (use-package evil-commentary
+    :after evil
+    :config
+    (evil-commentary-mode))
 #+end_src
