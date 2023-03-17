@@ -13,6 +13,9 @@ alias vim="$EDITOR"
 alias vimrc="cd ~/.config/nvim/ && $EDITOR ."
 alias nvimrc="cd ~/.config/nvim/ && $EDITOR ."
 
+# Helix
+alias hx="helix"
+
 # Nano
 alias nano="nano -l -c"
 
